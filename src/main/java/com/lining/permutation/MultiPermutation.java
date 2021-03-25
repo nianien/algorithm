@@ -18,25 +18,18 @@ package com.lining.permutation;
  * </pre>
  */
 public class MultiPermutation {
-    public interface ArraySelector {
-        public boolean select(char[] array);
+    public interface ArrayVisitor {
+        void visit(char[] array);
     }
 
-    private ArraySelector selector;
+    private ArrayVisitor visitor;
 
-    public MultiPermutation(ArraySelector selector) {
-        this.selector = selector;
+    public MultiPermutation(ArrayVisitor visitor) {
+        this.visitor = visitor;
     }
 
     public MultiPermutation() {
-        this(new ArraySelector() {
-
-            @Override
-            public boolean select(char[] arr) {
-                System.out.println(new String(arr));
-                return true;
-            }
-        });
+        this(arr -> System.out.println(new String(arr)));
     }
 
     /**
@@ -66,7 +59,8 @@ public class MultiPermutation {
     private int permute(char[] arr, int k) {
         if (k == arr.length - 1) {
             // 此时，数组最后一个位置k上的元素已确定，从而确定了一种排列
-            return selector.select(arr) ? 1 : 0;
+            visitor.visit(arr);
+            return 1;
         }
         int count = 0;
         // 位置k上的元素有ch.Length-k+1种可能值

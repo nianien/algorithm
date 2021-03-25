@@ -17,7 +17,10 @@ public class SortUtils {
      * @return
      */
     private static <T extends Comparable<T>> int partition(T[] arr, int low, int high) {
-        T pivot = arr[low];
+        //取枢纽元素
+        T pivot = arr[(low + high) / 2];
+        //置换首个元素
+        arr[(low + high) / 2] = arr[low];
         while (low < high) {
             while (low < high && arr[high].compareTo(pivot) >= 0) --high;
             arr[low] = arr[high];

@@ -34,13 +34,12 @@ public class MovingArray {
         for (int i = 0; i < p; i++) {
             //temp记录开始位置的元素，current为当前元素的位置，next为将要移动到当前位置的元素位置
             T temp = arr[i];
-            int current = i, next = (i + k) % length;
+            int current = i;
             //依次替换当前位置的元素，直到回到初始位置
-            while (i != next) {
-                count++;
+            for (int next = (i + k) % length; i != next; next = (i + k) % length) {
                 arr[current] = arr[next];
                 current = next;
-                next = (next + k) % length;
+                count++;
             }
             arr[current] = temp;
             count++;
@@ -76,16 +75,28 @@ public class MovingArray {
     /**
      * 辗转相除法求最大公约数
      *
-     * @param bigger
-     * @param smaller
+     * @param first
+     * @param second
      * @return
      */
-    private static int gcd(int bigger, int smaller) {
-        if (bigger < smaller)
-            return gcd(smaller, bigger);
-        if (bigger % smaller == 0)
-            return smaller;
-        return gcd(bigger % smaller, smaller);
+    private static int gcd(int first, int second) {
+        if (first < second)
+            return gcd(second, first);
+        if (first % second == 0)
+            return second;
+        return gcd(first % second, second);
+    }
+
+
+    /**
+     * 求最小公倍数
+     *
+     * @param bigger
+     * @param small
+     * @return
+     */
+    private static int lcm(int bigger, int small) {
+        return bigger * small / gcd(bigger, small);
     }
 
     /**
@@ -107,4 +118,6 @@ public class MovingArray {
         }
         return count;
     }
+
+
 }

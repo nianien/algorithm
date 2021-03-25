@@ -58,6 +58,26 @@ public class SpiralMatrix {
     public static void clockwise(Point p1, Point p2, CoordinateHandler handler) {
         if (!p1.le(p2))
             return;
+
+        //向右, 行不变, 列增加
+        for (int i = p1.x, j = p1.y; j <= p2.y; j++) {
+            handler.doHandle(i, j);
+        }
+        //向下, 列不变,行增加
+        for (int i = p1.x + 1, j = p2.y; i <= p2.x; i++) {
+            handler.doHandle(i, j);
+        }
+        //向左, 行不变,列递减
+        for (int i = p2.x, j = p2.y - 1; j >= p1.y; j--) {
+            handler.doHandle(i, j);
+        }
+        //向上, 列不变,行递减
+        for (int i = p2.x-1, j = p1.y; i > p1.y; i--) {
+            handler.doHandle(i, j);
+        }
+
+
+     /*
         int cols = p2.y - p1.y;
         int rows = p2.x - p1.x;
         // 起止步骤,0为第一步,end不执行
@@ -83,7 +103,7 @@ public class SpiralMatrix {
         if (end != 4) {
             handler.doHandle(p1.x, p1.y);
             return;
-        }
+        }*/
         // 此时P1,p2坐标已复位
         p1.increase(1, 1);
         p2.decrease(1, 1);

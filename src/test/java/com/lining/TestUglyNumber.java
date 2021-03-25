@@ -1,9 +1,10 @@
 package com.lining;
 
 import com.lining.uglynumber.UglyNumber;
-import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Objects;
 
 import static org.junit.Assert.assertTrue;
 
@@ -35,7 +36,7 @@ public class TestUglyNumber {
         long[] un = uglyNumber.findUgly(testNum);
         t2 = System.nanoTime();
         System.out.println("time:" + (t2 - t1));
-        assertTrue(ArrayUtils.isEquals(un, un2));
+        assertTrue(Objects.deepEquals(un, un2));
     }
 
 }

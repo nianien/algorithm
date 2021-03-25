@@ -26,7 +26,7 @@ public class StairClimber {
          *
          * @param steps
          */
-        public void record(List<Integer> steps);
+        void record(List<Integer> steps);
     }
 
     private StepsRecorder recorder;
@@ -44,13 +44,7 @@ public class StairClimber {
      * 默认构造方法
      */
     public StairClimber() {
-        this(new StepsRecorder() {
-
-            @Override
-            public void record(List<Integer> steps) {
-                System.out.println(Arrays.toString(steps.toArray()));
-            }
-        });
+        this(steps -> System.out.println(steps));
     }
 
     /**

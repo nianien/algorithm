@@ -1,7 +1,5 @@
 package com.lining.uglynumber;
 
-import com.nianien.core.exception.ExceptionHandler;
-
 /**
  * 寻找丑数 题目：我们把只包含因子2、3和5的数称作丑数（Ugly Number） 习惯上我们把1当做是第一个丑数 求按从小到大的顺序的第1500个丑数
  * 算法思想: 1)从小到大依次遍历当前丑数序列中的数字,并分别乘以2\3\5使乘积大于当前最大丑数,乘积分别记作a,b,c,则下一丑数为min{a,b,c}
@@ -24,7 +22,7 @@ public class UglyNumber {
         uglies[0] = 1;
         int i = 1;
         long a;
-        long b ;
+        long b;
         long c;
         while (i < n) {
             while ((a = uglies[i2] * 2) <= uglies[i - 1])
@@ -46,7 +44,7 @@ public class UglyNumber {
      * @param n
      * @return
      */
-    public long[] findUgly2(int n) {
+    public long[] findUgly2(int n) throws IllegalArgumentException {
         long[] uglies = new long[n];
         int i2 = 0;
         int i3 = 0;
@@ -63,21 +61,27 @@ public class UglyNumber {
                         uglies[i++] = a;
                     }
                     a = uglies[i2++] * 2;
-                    ExceptionHandler.throwIf(a < 0, "Long型溢出");
+                    if (a < 0) {
+                        throw new IllegalArgumentException("Long型溢出");
+                    }
                     break;
                 case 3:
                     if (uglies[i - 1] != b) {
                         uglies[i++] = b;
                     }
                     b = uglies[i3++] * 3;
-                    ExceptionHandler.throwIf(b < 0, "Long型溢出");
+                    if (b < 0) {
+                        throw new IllegalArgumentException("Long型溢出");
+                    }
                     break;
                 case 5:
                     if (uglies[i - 1] != c) {
                         uglies[i++] = c;
                     }
                     c = uglies[i5++] * 5;
-                    ExceptionHandler.throwIf(c < 0, "Long型溢出");
+                    if (c < 0) {
+                        throw new IllegalArgumentException("Long型溢出");
+                    }
                     break;
             }
         }

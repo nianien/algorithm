@@ -1,13 +1,13 @@
 package com.lining;
 
 import com.lining.arraymove.MovingArray;
-import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 
 import static org.junit.Assert.assertTrue;
 
@@ -46,7 +46,7 @@ public class TestArrayMoving {
         Integer[] arr2 = Arrays.copyOf(testArray, testArray.length);
         int count2 = MovingArray.moveLeft2(arr2, moved);
         System.out.println(count2 + " moved:" + Arrays.toString(arr2));
-        assertTrue(ArrayUtils.isEquals(arr1, arr2));
+        assertTrue(Objects.deepEquals(arr1, arr2));
         assertTrue(count1 <= count2);
         System.out.println("==================================");
     }

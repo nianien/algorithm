@@ -1,10 +1,10 @@
 package com.lining;
 
 import com.lining.sorting.SortUtils;
-import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,6 +21,6 @@ public class TestSortUtils {
         SortUtils.quickSort(arr);
         Arrays.sort(arr2);
         System.out.println(Arrays.toString(arr));
-        assert ArrayUtils.isEquals(arr, arr2);
+        assert Objects.deepEquals(arr, arr2);
     }
 }

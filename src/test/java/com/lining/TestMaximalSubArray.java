@@ -1,7 +1,7 @@
 package com.lining;
 
 import com.lining.maxsubarray.MaximalSubArray;
-import org.apache.commons.lang3.ArrayUtils;
+import com.sun.tools.javac.util.ArrayUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +10,7 @@ import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 
 import static org.junit.Assert.*;
 
@@ -54,6 +55,6 @@ public class TestMaximalSubArray {
 
     @Test
     public void max() {
-        assertTrue(ArrayUtils.isEquals(maximalSubArray.max(testArray), result));
+        assertTrue(Objects.deepEquals(maximalSubArray.max(testArray), result));
     }
 }
