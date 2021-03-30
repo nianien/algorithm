@@ -63,7 +63,7 @@ import leetcode.editor.cn.TypeDefined.ListNode;
 public class ReverseNodesInKGroup {
     public static void main(String[] args) {
         Solution solution = new ReverseNodesInKGroup().new Solution();
-        ListNode head = ListNode.build(2, 1, 3, 5);
+        ListNode head = ListNode.build(1, 2, 3, 4, 5);
         System.out.println(head);
         System.out.println(solution.reverseKGroup(head, 2));
     }
@@ -84,36 +84,42 @@ public class ReverseNodesInKGroup {
     class Solution {
         public ListNode reverseKGroup(ListNode head, int k) {
 
-            ListNode list = new ListNode();
-            list.next = head;
-
-            ListNode begin = list;
-            while (true) {
-                int i = 1;
-                ListNode end = begin.next;
-                while (i < k && end != null) {
-                    end = end.next;
-                    i++;
-                }
-                if (i == k) {
-                    ListNode p = begin.next;
-                    ListNode q = p.next;
-                    while (p != end) {
-                        ListNode t = q.next;
-                        q.next = p;
-                        p = q;
-                        q = t;
-                    }
-                    ListNode r = begin.next;
-                    r.next = q;
-                    begin.next = p;
-                    begin = r;
-                } else {
-                    break;
-                }
+            if (head == null || head.next == null || k == 1) {
+                return head;
             }
+            ListNode tail = head;
+            for (int i = 0; i < k; i++) {
+                //剩余数量小于k的话，则不需要反转。
+                if (tail == null) {
+                    return head;
+                }
+                tail = tail.next;
+            }
+            // 反转前 k 个元素, 第K个节点是新表头
+            ListNode newHead = reverse(head, tail);
+            //下一轮的开始的地方就是tail
+            head.next = reverseKGroup(tail, k);
+            return newHead;
+        }
 
-            return list.next;
+        /**
+         * 左开右闭, 返回翻转后的表头,即tail前一个节点
+         *
+         * @param head
+         * @param tail
+         * @return
+         */
+        private ListNode reverse(ListNode head, ListNode tail) {
+            ListNode pre = null, next;
+            while (head != tail) {
+                //翻转节点
+                next = head.next;
+                head.next = pre;
+                //后移指针
+                pre = head;
+                head = next;
+            }
+            return pre;
         }
     }
 
