@@ -66,10 +66,17 @@ public class SortList {
      * }
      */
     class Solution {
-
-
-        // 自底向上归并排序
         public ListNode sortList(ListNode head) {
+            return sortTop2Bottom(head);
+        }
+
+        /**
+         * 自底向上归并排序
+         *
+         * @param head
+         * @return
+         */
+        public ListNode sortBottom2Top(ListNode head) {
             if (head == null) {
                 return head;
             }
@@ -77,7 +84,6 @@ public class SortList {
             int length = length(head);
             // 引入dummy-node
             ListNode dummy = new ListNode(0, head);
-
             // 每次将链表拆分成若干个长度为size的子链表 , 并按照每两个子链表一组进行合并
             for (int size = 1; size < length; size <<= 1) {
                 ListNode tail = dummy;
@@ -97,6 +103,31 @@ public class SortList {
             }
             // 返回新排好序的链表
             return dummy.next;
+        }
+
+
+        /**
+         * 自上向下归并
+         *
+         * @param head
+         * @return
+         */
+        private ListNode sortTop2Bottom(ListNode head) {
+            if (head == null || head.next == null) {
+                return head;
+            }
+            ListNode slow = head;
+            ListNode fast = head.next;
+            while (fast != null && fast.next != null) {
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+            ListNode left = head;
+            ListNode right = slow.next;
+            //断链
+            slow.next = null;
+            return mergeTwoLists(sortTop2Bottom(left), sortTop2Bottom(right));
+
         }
 
 
