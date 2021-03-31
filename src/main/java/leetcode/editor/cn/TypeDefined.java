@@ -1,5 +1,9 @@
 package leetcode.editor.cn;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * scm.com Inc.
  * Copyright (c) 2004-2021 All Rights Reserved.
@@ -49,5 +53,11 @@ public class TypeDefined {
             return h.next;
         }
     }
+
+
+    public static List<Integer> toList(int[] arr) {
+        return Arrays.stream(arr).mapToObj(i -> i).collect(Collectors.toList());
+    }
+
 
 }
