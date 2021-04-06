@@ -20,18 +20,22 @@
 
 package leetcode.editor.cn;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DaYinCong1daoZuiDaDeNweiShuLcof {
     public static void main(String[] args) {
         Solution solution = new DaYinCong1daoZuiDaDeNweiShuLcof().new Solution();
         System.out.println(TypeDefined.toList(solution.printNumbers(1)));
-        System.out.println(solution.printNumbers2(2));
+        System.out.println(TypeDefined.toList(solution.printNumbers2(2)));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+
+        /**
+         * 该算法比较投机
+         *
+         * @param n
+         * @return
+         */
         public int[] printNumbers(int n) {
             int max = (int) Math.pow(10, n) - 1;
             int[] arr = new int[max];
@@ -42,8 +46,15 @@ public class DaYinCong1daoZuiDaDeNweiShuLcof {
         }
 
 
-        private List<String> printNumbers2(int n) {
-            List<String> numbers = new ArrayList<>();
+        /**
+         * 字符串模拟进制
+         *
+         * @param n
+         * @return
+         */
+        private int[] printNumbers2(int n) {
+            int[] nums = new int[(int) Math.pow(10, n) - 1];
+            int count = 0;
             char[] arr = new char[n];
             for (int i = 0; i < n; i++) {
                 arr[i] = '0';
@@ -52,7 +63,7 @@ public class DaYinCong1daoZuiDaDeNweiShuLcof {
             for (; ; ) {
                 while (arr[0] < '9') {
                     arr[0]++;
-                    numbers.add(toNumber(arr));
+                    nums[count++] = toNumber(arr);
                 }
                 for (int i = 1; i < n; i++) {
                     if (arr[i] < '9') {
@@ -65,29 +76,31 @@ public class DaYinCong1daoZuiDaDeNweiShuLcof {
                     }
                 }
                 arr[0] = '0';
-                numbers.add(toNumber(arr));
+                nums[count++] = toNumber(arr);
             }
-            return numbers;
+            return nums;
         }
 
-        private String toNumber(char[] arr) {
-           /* StringBuilder s = new StringBuilder();
+        private int toNumber(char[] arr) {
+         /*   StringBuilder s = new StringBuilder();
             int n = arr.length;
             boolean validZero = false;
             for (n--; n >= 0; n--) {
+                //第一个非零数字之后的零才有效
                 if (arr[n] != '0') {
                     validZero = true;
                 }
-                if (valid || arr[n] != '0') {
+                if (validZero || arr[n] != '0') {
                     s.append(arr[n]);
                 }
             }
             return s.toString();*/
+//            利用十进制计算
             int sum = 0;
             for (int i = arr.length - 1; i >= 0; i--) {
                 sum = sum * 10 + (arr[i] - '0');
             }
-            return sum + "";
+            return sum;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

@@ -55,9 +55,28 @@ public class TypeDefined {
     }
 
 
+    /**
+     * 整型列表
+     *
+     * @param arr
+     * @return
+     */
     public static List<Integer> toList(int[] arr) {
         return Arrays.stream(arr).mapToObj(i -> i).collect(Collectors.toList());
     }
 
+    /**
+     * 整型数组
+     *
+     * @param list
+     * @return
+     */
+    public static int[] toInts(List<Integer> list) {
+        int[] arr = new int[list.size()];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = list.get(i);
+        }
+        return arr;
+    }
 
 }
