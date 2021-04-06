@@ -9,8 +9,6 @@ public class 大数打印 {
 
     public static void main(String[] args) {
         print(2);
-
-        print(new char[]{'1','8', '9', '0', '0'});
     }
 
     private static void print(int n) {
@@ -44,13 +42,14 @@ public class 大数打印 {
     private static void print(char[] arr) {
         StringBuilder s = new StringBuilder();
         int n = arr.length;
-        for (n--; n > 1; n--) {
+        boolean valid = false;
+        for (n--; n >= 0; n--) {
             if (arr[n] != '0') {
-                break;
+                valid = true;
             }
-        }
-        for (int i = 0; i <= n; i++) {
-            s.append(arr[i]);
+            if (valid || arr[n] != '0') {
+                s.append(arr[n]);
+            }
         }
         System.out.println(s.toString());
 //        System.out.println(new StringBuilder(new String(arr)).reverse());

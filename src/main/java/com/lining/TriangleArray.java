@@ -4,7 +4,7 @@ package com.lining;
  * scm.com Inc.
  * Copyright (c) 2004-2021 All Rights Reserved.
  */
-public class TrigleArray {
+public class TriangleArray {
     public static void main(String[] args) {
         int[][] up = {
                 {3, 9, 1, 4, 7},

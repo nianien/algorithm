@@ -38,6 +38,11 @@ public class TestArrayMoving {
     }
 
     @Test
+    public void test2() {
+        MovingArray.moveLeft(new Integer[]{-1}, 2);
+    }
+
+    @Test
     public void test() {
         System.out.println("before:" + Arrays.toString(testArray) + ",move left:" + moved);
         Integer[] arr1 = Arrays.copyOf(testArray, testArray.length);
