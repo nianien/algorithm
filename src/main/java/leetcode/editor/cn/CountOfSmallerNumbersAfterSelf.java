@@ -66,7 +66,7 @@ public class CountOfSmallerNumbersAfterSelf {
          * @param l
          * @param r
          */
-        public void mergeSort(Element[] a, int l, int r) {
+        private void mergeSort(Element[] a, int l, int r) {
             if (l >= r) {
                 return;
             }
@@ -87,12 +87,12 @@ public class CountOfSmallerNumbersAfterSelf {
          * @param mid
          * @param r
          */
-        public void merge(Element[] a, int l, int mid, int r) {
+        private void merge(Element[] a, int l, int mid, int r) {
             int i = l, j = mid + 1, p = l;
             while (i <= mid && j <= r) {
                 if (a[i].val <= a[j].val) {
                     temp[p] = a[i];
-                    //当左半部分归并时, 计算右半部分小样当前值的数量
+                    //当左半部分归并时, 计算右半部分小于当前值的数量
                     ans[a[i].index] += (j - mid - 1);
                     ++i;
                 } else {
@@ -103,7 +103,7 @@ public class CountOfSmallerNumbersAfterSelf {
             }
             while (i <= mid) {
                 temp[p] = a[i];
-                //当左半部分归并时, 计算右半部分小样当前值的数量
+                //当左半部分归并时, 计算右半部分小于当前值的数量
                 ans[a[i].index] += (j - mid - 1);
                 ++i;
                 ++p;
@@ -114,10 +114,10 @@ public class CountOfSmallerNumbersAfterSelf {
                 ++p;
             }
             //复制临时数组中已排好序的元素
-            System.arraycopy(temp, l, a, l, r - l + 1);
-//            for (int k = l; k <= r; ++k) {
-//                a[k] = temp[k];
-//            }
+//            System.arraycopy(temp, l, a, l, r - l + 1);
+            for (int k = l; k <= r; ++k) {
+                a[k] = temp[k];
+            }
         }
 
         /**
