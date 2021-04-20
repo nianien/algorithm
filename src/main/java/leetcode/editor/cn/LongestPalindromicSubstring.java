@@ -48,27 +48,28 @@ package leetcode.editor.cn;
 public class LongestPalindromicSubstring {
     public static void main(String[] args) {
         Solution solution = new LongestPalindromicSubstring().new Solution();
-        System.out.println(solution.longestPalindrome("abcba"));
+        System.out.println(solution.longestPalindrome("aaaa"));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         /**
-         *  a. i + 1 = j -1，即回文长度为1时，dp[ i ][ i ] = true;
-         *  b. i +1 = (j - 1) -1，即回文长度为2时，dp[ i ][ i + 1] = （s[ i ] == s[ i + 1]）。
+         * a. i + 1 = j -1，即回文长度为1时，dp[ i ][ i ] = true;
+         * b. i +1 = (j - 1) -1，即回文长度为2时，dp[ i ][ i + 1] = （s[ i ] == s[ i + 1]）。
+         *
          * @param s
          * @return
          */
         public String longestPalindrome(String s) {
             int length = s.length();
-//            boolean[][] dp=new boolean[s.length()][s.length()];
-            // 按列为主,dp[i][j]=arr[j * (j + 1) / 2 + i]
+            // 按列c存储,dp[i][j]=arr[j * (j + 1) / 2 + i]
             boolean[] arr = new boolean[length * (length + 1) / 2];
             int row = 0, col = 0;
             for (int i = s.length() - 2; i >= 0; i--) {
                 for (int j = i + 1; j <= s.length() - 1; j++) {
-//                    if (s.charAt(i) == s.charAt(j) && (j - i <= 2 || dp[i+1][j-1])) {
-                    if (s.charAt(i) == s.charAt(j) && (j - i <= 2 || arr[(j * (j - 1) / 2 + i + 1)])) {
+                    //dp[i+1][j-1]=arr[((j - 1) * j / 2 + i + 1)]
+                    if (s.charAt(i) == s.charAt(j) && (j - i <= 2 || arr[((j - 1) * j / 2 + i + 1)])) {
+                        //dp[i][j]=arr[j * (j + 1) / 2 + i]
                         arr[j * (j + 1) / 2 + i] = true;
                         if (j - i + 1 > col - row + 1) {
                             row = i;
