@@ -66,18 +66,9 @@ public class MedianOfTwoSortedArrays {
         Solution solution = new MedianOfTwoSortedArrays().new Solution();
         int[] b = {2, 3, 5, 6};
         int[] a = {4, 5, 6, 7, 8, 9, 10};
-        int total = a.length + b.length;
-        int mid = total / 2;
-        if (total % 2 == 0) {
-            int topk1 = solution.findTopK(a, b, 0, 0, mid);
-            int topk2 = solution.findTopK(a, b, 0, 0, mid + 1);
-            System.out.println("==>[k,k+1]/2:" + (topk1 + topk2) / 2.0);
-        } else {
-            System.out.println("==>[k+1]:" + solution.findTopK(a, b, 0, 0, (total + 1) / 2));
-        }
+
         System.out.println(solution.findMedianSortedArrays(a, b));
-        int k = 11;
-        System.out.println(solution.findTopK(a, b, 0, 0, k));
+        System.out.println(solution.findMedianSortedArraysByTopK(a, b));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -113,6 +104,18 @@ public class MedianOfTwoSortedArrays {
                 }
             }
             return (m + n) % 2 == 0 ? (median1 + median2) / 2.0 : median1;
+        }
+
+        public double findMedianSortedArraysByTopK(int[] a, int[] b) {
+            int total = a.length + b.length;
+            int mid = total / 2;
+            if (total % 2 == 0) {
+                int topk1 = findTopK(a, b, 0, 0, mid);
+                int topk2 = findTopK(a, b, 0, 0, mid + 1);
+                return (topk1 + topk2) / 2.0;
+            } else {
+                return findTopK(a, b, 0, 0, mid + 1);
+            }
         }
 
         /**
