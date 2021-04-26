@@ -64,18 +64,19 @@ package leetcode.editor.cn;
 public class MedianOfTwoSortedArrays {
     public static void main(String[] args) {
         Solution solution = new MedianOfTwoSortedArrays().new Solution();
-        int[] b = {2, 3, 5, 6};
-        int[] a = {4, 5, 6, 7, 8, 9, 10};
+        int[] b = {1};
+        int[] a = {2, 3, 4, 5, 6};
 
         System.out.println(solution.findMedianSortedArrays(a, b));
-        System.out.println(solution.findMedianSortedArraysByTopK(a, b));
+        System.out.println(solution.findMedianSortedArrays2(a, b));
     }
+
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        public double findMedianSortedArrays(int[] a, int[] b) {
+        public double findMedianSortedArrays2(int[] a, int[] b) {
             if (a.length > b.length) {
-                return findMedianSortedArrays(b, a);
+                return findMedianSortedArrays2(b, a);
             }
             int m = a.length;
             int n = b.length;
@@ -106,29 +107,24 @@ public class MedianOfTwoSortedArrays {
             return (m + n) % 2 == 0 ? (median1 + median2) / 2.0 : median1;
         }
 
-        public double findMedianSortedArraysByTopK(int[] a, int[] b) {
-            int total = a.length + b.length;
-            int mid = total / 2;
-            if (total % 2 == 0) {
-                int topk1 = findTopK(a, b, 0, 0, mid);
-                int topk2 = findTopK(a, b, 0, 0, mid + 1);
-                return (topk1 + topk2) / 2.0;
-            } else {
-                return findTopK(a, b, 0, 0, mid + 1);
-            }
+        public double findMedianSortedArrays(int[] a, int[] b) {
+            int k1 = (a.length + b.length + 1) / 2;
+            int k2 = (a.length + b.length + 2) / 2;
+            return (findKth(a, 0, b, 0, k1) + findKth(a, 0, b, 0, k2)) / 2.0;
         }
+
 
         /**
          * 因为递归过程是排除K之前的元素,因此需要递归修正起始索引位置
          *
          * @param arr1   第一个数组
-         * @param arr2   第二个数组
          * @param start1 第一个数组起始位置
+         * @param arr2   第二个数组
          * @param start2 第二个数组起始位置
          * @param k
          * @return
          */
-        private int findTopK(int[] arr1, int[] arr2, int start1, int start2, int k) {
+        private int findKth(int[] arr1, int start1, int[] arr2, int start2, int k) {
             if (start1 == arr1.length) {
                 return arr2[start2 + k - 1];
             }
@@ -138,14 +134,14 @@ public class MedianOfTwoSortedArrays {
             if (k == 1) {
                 return Math.min(arr1[start1], arr2[start2]);
             }
-            //查找剩余的k/2个元素, 如果不足k/2,则查找剩余全部元素
-            int mid1 = Math.min(arr1.length - start1, k / 2);
-            int mid2 = Math.min(arr2.length - start2, k / 2);
+            //定位第k/2个元素的索引
+            int index1 = Math.min(arr1.length - 1, start1 + k / 2);
+            int index2 = Math.min(arr2.length - 1, start2 + k / 2);
             //判定两个数组第mid个元素的大小,对于mid较小的数组,前mid个元素一定属于top(k/2),因此只需在剩余元素中查找top(k-mid)即可
-            if (arr1[start1 + mid1 - 1] < arr2[start2 + mid2 - 1]) {
-                return findTopK(arr1, arr2, start1 + mid1, start2, k - mid1);
+            if (arr1[index1] < arr2[index2]) {
+                return findKth(arr1, index1 + 1, arr2, start2, k - (index1 - start1 + 1));
             } else {
-                return findTopK(arr1, arr2, start1, start2 + mid2, k - mid2);
+                return findKth(arr1, start1, arr2, index2 + 1, k - (index2 - start2 + 1));
             }
         }
     }
