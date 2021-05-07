@@ -137,7 +137,7 @@ public class MedianOfTwoSortedArrays {
             //定位第k/2个元素的索引
             int index1 = Math.min(arr1.length - 1, start1 + k / 2);
             int index2 = Math.min(arr2.length - 1, start2 + k / 2);
-            //判定两个数组第mid个元素的大小,对于mid较小的数组,前mid个元素一定属于top(k/2),因此只需在剩余元素中查找top(k-mid)即可
+            //判定两个数组第(k/2)个元素的大小,对于较小的数组,前(k/2)个元素一定属于top(k/2),因此只需在剩余元素中查找top(k/2  )即可
             if (arr1[index1] < arr2[index2]) {
                 return findKth(arr1, index1 + 1, arr2, start2, k - (index1 - start1 + 1));
             } else {
