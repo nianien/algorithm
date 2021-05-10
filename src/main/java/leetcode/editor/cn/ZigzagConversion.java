@@ -1,3 +1,4 @@
+//6.zigzag-conversion
 //将一个给定字符串 s 根据给定的行数 numRows ，以从上往下、从左到右进行 Z 字形排列。 
 //
 // 比如输入字符串为 "PAYPALISHIRING" 行数为 3 时，排列如下： 
@@ -51,7 +52,7 @@
 // 1 <= numRows <= 1000 
 // 
 // Related Topics 字符串 
-// 👍 1053 👎 0
+// 👍 1133 👎 0
 
 
 package leetcode.editor.cn;

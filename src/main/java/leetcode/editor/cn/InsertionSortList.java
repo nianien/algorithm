@@ -1,3 +1,4 @@
+//147.insertion-sort-list
 //对链表进行插入排序。 
 //
 // 
@@ -28,53 +29,51 @@
 //输出: -1->0->3->4->5
 // 
 // Related Topics 排序 链表 
-// 👍 371 👎 0
+// 👍 385 👎 0
 
-
+  
 package leetcode.editor.cn;
 
 import leetcode.editor.cn.TypeDefined.ListNode;
 
-public class InsertionSortList {
-    public static void main(String[] args) {
-        Solution solution = new InsertionSortList().new Solution();
-    }
-    //leetcode submit region begin(Prohibit modification and deletion)
-
+public class InsertionSortList{
+  public static void main(String[] args) {
+       Solution solution = new InsertionSortList().new Solution();
+  }
+  //leetcode submit region begin(Prohibit modification and deletion)
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
     /**
-     * Definition for singly-linked list.
-     * public class ListNode {
-     * int val;
-     * ListNode next;
-     * ListNode() {}
-     * ListNode(int val) { this.val = val; }
-     * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-     * }
+     * 递归插入排序
+     *
+     * @param head
+     * @return
      */
-    class Solution {
-
-        /**
-         * 递归插入排序
-         *
-         * @param head
-         * @return
-         */
-        public ListNode insertionSortList(ListNode head) {
-            if (head == null || head.next == null) {
-                return head;
-            }
-            ListNode tail = insertionSortList(head.next);
-            ListNode dummy = new ListNode(-1, tail);
-            ListNode pre = dummy;
-            while (pre.next != null && head.val > pre.next.val) {
-                pre = pre.next;
-            }
-            ListNode temp = pre.next;
-            pre.next = head;
-            head.next = temp;
-            return dummy.next;
+    public ListNode insertionSortList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
         }
+        ListNode tail = insertionSortList(head.next);
+        ListNode dummy = new ListNode(-1, tail);
+        ListNode pre = dummy;
+        while (pre.next != null && head.val > pre.next.val) {
+            pre = pre.next;
+        }
+        ListNode temp = pre.next;
+        pre.next = head;
+        head.next = temp;
+        return dummy.next;
     }
+}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

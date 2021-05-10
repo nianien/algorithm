@@ -1,3 +1,4 @@
+//148.sort-list
 //给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 。 
 //
 // 进阶： 
@@ -38,7 +39,7 @@
 // -105 <= Node.val <= 105 
 // 
 // Related Topics 排序 链表 
-// 👍 1067 👎 0
+// 👍 1121 👎 0
 
 
 package leetcode.editor.cn;
@@ -48,10 +49,6 @@ import leetcode.editor.cn.TypeDefined.ListNode;
 public class SortList {
     public static void main(String[] args) {
         Solution solution = new SortList().new Solution();
-        ListNode node = ListNode.build(-1, 5, 3, 4, 0);
-        System.out.println(node);
-        System.out.println(solution.sortList(node));
-
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
@@ -77,7 +74,7 @@ public class SortList {
          * @return
          */
         public ListNode sortBottom2Top(ListNode head) {
-            if (head == null) {
+            if (head == null || head.next == null) {
                 return head;
             }
             // 统计链表长度
@@ -105,6 +102,33 @@ public class SortList {
             return dummy.next;
         }
 
+        /**
+         * 截取前n个节点,返回截断后的头节点
+         *
+         * @param head
+         * @param n
+         * @return
+         */
+        private ListNode cut(ListNode head, int n) {
+            ListNode p = head;
+            while (p != null && --n > 0) {
+                p = p.next;
+            }
+            if (p == null) return null;
+            ListNode next = p.next;
+            p.next = null;
+            return next;
+        }
+
+
+        private int length(ListNode node) {
+            int length = 0;
+            while (node != null) {
+                length++;
+                node = node.next;
+            }
+            return length;
+        }
 
         /**
          * 自上向下归并
@@ -150,34 +174,6 @@ public class SortList {
             return dummy.next;
         }
 
-
-        /**
-         * 截取前n个节点,返回截断后的头节点
-         *
-         * @param head
-         * @param n
-         * @return
-         */
-        private ListNode cut(ListNode head, int n) {
-            ListNode p = head;
-            while (p != null && --n > 0) {
-                p = p.next;
-            }
-            if (p == null) return null;
-            ListNode next = p.next;
-            p.next = null;
-            return next;
-        }
-
-
-        private int length(ListNode node) {
-            int length = 0;
-            while (node != null) {
-                length++;
-                node = node.next;
-            }
-            return length;
-        }
 
     }
 //leetcode submit region end(Prohibit modification and deletion)

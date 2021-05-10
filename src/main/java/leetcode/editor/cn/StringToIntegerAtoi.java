@@ -1,3 +1,4 @@
+//8.string-to-integer-atoi
 //请你来实现一个 myAtoi(string s) 函数，使其能将字符串转换成一个 32 位有符号整数（类似 C/C++ 中的 atoi 函数）。 
 //
 // 函数 myAtoi(string s) 的算法如下： 
@@ -108,7 +109,7 @@
 // s 由英文字母（大写和小写）、数字（0-9）、' '、'+'、'-' 和 '.' 组成 
 // 
 // Related Topics 数学 字符串 
-// 👍 1029 👎 0
+// 👍 1110 👎 0
 
 
 package leetcode.editor.cn;
@@ -136,7 +137,6 @@ public class StringToIntegerAtoi {
             int num = 0;
             int quotient = Integer.MAX_VALUE / 10;
             int remainder = Integer.MAX_VALUE % 10;
-            boolean begin = false;
             for (char ch : chs) {
                 if (ch >= '0' && ch <= '9') {
                     int i = (ch - '0');
