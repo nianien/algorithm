@@ -1,4 +1,4 @@
-package com.scorpio.leetcode.editor.cn
+package scala.leetcode.editor.cn
 
 /**
  * scm.com Inc.
