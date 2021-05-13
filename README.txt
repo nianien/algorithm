@@ -14,16 +14,19 @@ public class $!velocityTool.camelCaseName(${question.titleSlug}){
 }
 
 
-for scala
+settings for scala
+###TemFilePath###
+/Users/scorpio/Workspace/scorpio/skyfalling/algorithm/src/main/scala/com/scorpio
 
+###CodeFileName###
 $!velocityTool.camelCaseName(${question.titleSlug})
 
+###CodeTemplate###
 //${question.frontendQuestionId}.${question.titleSlug}
 ${question.content}
 
 package leetcode.editor.cn;
-object $!velocityTool.camelCaseName(${question.titleSlug}) {
-  def main(args : Array[String]){
-  }
+object $!velocityTool.camelCaseName(${question.titleSlug}) extends App{
+  // entry test from here
   ${question.code}
 }

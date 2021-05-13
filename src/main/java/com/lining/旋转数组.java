@@ -1,5 +1,8 @@
 package com.lining;
 
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 /**
  * 折叠数组
  * scm.com Inc.
@@ -40,5 +43,6 @@ public class 旋转数组 {
         } else {
             return min2(arr, low, mid);
         }
+
     }
 }
