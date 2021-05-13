@@ -16,7 +16,7 @@ public class $!velocityTool.camelCaseName(${question.titleSlug}){
 
 settings for scala
 ###TemFilePath###
-/Users/scorpio/Workspace/scorpio/skyfalling/algorithm/src/main/scala/com/scorpio
+/Users/scorpio/Workspace/scorpio/skyfalling/algorithm/src/main/scala/scala
 
 ###CodeFileName###
 $!velocityTool.camelCaseName(${question.titleSlug})
@@ -25,7 +25,7 @@ $!velocityTool.camelCaseName(${question.titleSlug})
 //${question.frontendQuestionId}.${question.titleSlug}
 ${question.content}
 
-package leetcode.editor.cn;
+package scala.leetcode.editor.cn;
 object $!velocityTool.camelCaseName(${question.titleSlug}) extends App{
   // entry test from here
   ${question.code}
