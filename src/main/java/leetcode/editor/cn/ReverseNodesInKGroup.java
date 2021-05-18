@@ -58,7 +58,8 @@
 
 package leetcode.editor.cn;
 
-import leetcode.editor.cn.TypeDefined.ListNode;
+
+import leetcode.editor.java.ListNode;
 
 public class ReverseNodesInKGroup {
     public static void main(String[] args) {

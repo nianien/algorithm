@@ -1,8 +1,5 @@
 package com.lining;
 
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
 /**
  * 折叠数组
  * scm.com Inc.

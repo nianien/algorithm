@@ -21,11 +21,13 @@
 
 package leetcode.editor.cn;
 
+import leetcode.editor.java.Lists;
+
 public class DaYinCong1daoZuiDaDeNweiShuLcof {
     public static void main(String[] args) {
         Solution solution = new DaYinCong1daoZuiDaDeNweiShuLcof().new Solution();
-        System.out.println(TypeDefined.toList(solution.printNumbers(1)));
-        System.out.println(TypeDefined.toList(solution.printNumbers2(2)));
+        System.out.println(Lists.toList(solution.printNumbers(1)));
+        System.out.println(Lists.toList(solution.printNumbers2(2)));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

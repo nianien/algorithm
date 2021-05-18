@@ -52,10 +52,6 @@
 package leetcode.editor.cn;
 
 public class ContainerWithMostWater {
-    public static void main(String[] args) {
-        Solution solution = new ContainerWithMostWater().new Solution();
-        System.out.println(solution.maxArea(new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7}));
-    }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
@@ -93,5 +89,10 @@ public class ContainerWithMostWater {
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
+
+    public static void main(String[] args) {
+        Solution solution = new ContainerWithMostWater().new Solution();
+        System.out.println(solution.maxArea(new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7}));
+    }
 
 }

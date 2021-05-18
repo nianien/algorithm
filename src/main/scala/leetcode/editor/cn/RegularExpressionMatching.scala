@@ -1,14 +1,7 @@
 package leetcode.editor.cn
 
-/**
- * scm.com Inc.
- * Copyright (c) 2004-2021 All Rights Reserved.
- */
+
 object RegularExpressionMatching extends App {
-  //entry from here:
-  println(isMatch("mississippi", "mis*is*p*."))
-  println(isMatch("aab", "*a*b"))
-  println(isMatch("aab", "c*a*b"))
 
   //leetcode submit region begin(Prohibit modification and deletion)
   object Solution {
@@ -52,5 +45,10 @@ object RegularExpressionMatching extends App {
     }
   }
   //leetcode submit region end(Prohibit modification and deletion)
+  //entry from here:
+  println(Solution.isMatch("mississippi", "mis*is*p*."))
+  println(Solution.isMatch("aab", "*a*b"))
+  println(Solution.isMatch("aab", "c*a*b"))
+
 
 }

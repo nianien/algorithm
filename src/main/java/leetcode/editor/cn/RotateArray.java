@@ -49,12 +49,14 @@
 
 package leetcode.editor.cn;
 
+import leetcode.editor.java.Lists;
+
 public class RotateArray {
     public static void main(String[] args) {
         Solution solution = new RotateArray().new Solution();
         int[] arr = new int[]{1, 2, 3, 4, 5, 6, 7};
         solution.rotate(arr, 3);
-        System.out.println(TypeDefined.toList(arr));
+        System.out.println(Lists.toList(arr));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

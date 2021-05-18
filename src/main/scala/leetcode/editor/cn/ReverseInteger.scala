@@ -1,14 +1,7 @@
 package leetcode.editor.cn
 
-/**
- * scm.com Inc.
- * Copyright (c) 2004-2021 All Rights Reserved.
- */
 object ReverseInteger extends App {
-  //entry from here:
-  println(Solution.reverse(-123))
-  println(Solution.reverse(1534236469))
-
+  
   //leetcode submit region begin(Prohibit modification and deletion)
   object Solution {
     def reverse(x: Int): Int = {
@@ -26,4 +19,7 @@ object ReverseInteger extends App {
   }
   //leetcode submit region end(Prohibit modification and deletion)
 
+  //test from here:
+  println(Solution.reverse(-123))
+  println(Solution.reverse(1534236469))
 }

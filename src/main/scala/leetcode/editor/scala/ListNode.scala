@@ -1,12 +1,7 @@
-package scala.leetcode.editor.cn
+package leetcode.editor.scala
 
-/**
- * scm.com Inc.
- * Copyright (c) 2004-2021 All Rights Reserved.
- */
-object TypeDefined {
-  class ListNode(_x: Int = 0, _next: ListNode = null) {
-    var x = _x;
+class ListNode(_x: Int = 0, _next: ListNode = null) {
+    var x = _x
     var next = _next
 
     /**
@@ -26,7 +21,9 @@ object TypeDefined {
       }
       sb.toString
     }
+
   }
+
 
   object ListNode {
     /**
@@ -35,14 +32,13 @@ object TypeDefined {
      * @param values
      * @return
      */
-    def build(values: Int*): TypeDefined.ListNode = {
-      val h = new TypeDefined.ListNode(-1)
+    def build(values: Int*): ListNode = {
+      val h = new ListNode(-1)
       var p = h
       for (value <- values) {
-        p.next = new TypeDefined.ListNode(value)
+        p.next = new ListNode(value)
         p = p.next
       }
       h.next
     }
   }
-}

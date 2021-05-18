@@ -1,14 +1,9 @@
-package scala.leetcode.editor.cn
+package leetcode.editor.cn
 
-import scala.leetcode.editor.cn.TypeDefined.ListNode
+import leetcode.editor.scala.ListNode
 
-/**
- * scm.com Inc.
- * Copyright (c) 2004-2021 All Rights Reserved.
- */
+
 object RemoveNthNodeFromEndOfList extends App {
-  //entry from here:
-  println(Solution.removeNthFromEnd(ListNode.build(1), 2))
   //leetcode submit region begin(Prohibit modification and deletion)
 
   /**
@@ -37,4 +32,6 @@ object RemoveNthNodeFromEndOfList extends App {
   }
   //leetcode submit region end(Prohibit modification and deletion)
 
+  //test from here:
+  println(Solution.removeNthFromEnd(ListNode.build(1), 2))
 }

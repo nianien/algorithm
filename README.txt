@@ -1,4 +1,6 @@
-for java:
+########################
+settings for java
+########################
 
 $!velocityTool.camelCaseName(${question.titleSlug})
 
@@ -14,9 +16,12 @@ public class $!velocityTool.camelCaseName(${question.titleSlug}){
 }
 
 
-settings for scala
+########################
+settings for python
+########################
+
 ###TemFilePath###
-/Users/scorpio/Workspace/scorpio/skyfalling/algorithm/src/main/scala/scala
+/Users/scorpio/Workspace/scorpio/skyfalling/algorithm/src/main/scala
 
 ###CodeFileName###
 $!velocityTool.camelCaseName(${question.titleSlug})
@@ -24,9 +29,29 @@ $!velocityTool.camelCaseName(${question.titleSlug})
 ###CodeTemplate###
 //${question.frontendQuestionId}.${question.titleSlug}
 ${question.content}
-
 package scala.leetcode.editor.cn;
+
 object $!velocityTool.camelCaseName(${question.titleSlug}) extends App{
-  // entry test from here
   ${question.code}
+  //test from here
 }
+
+
+
+########################
+settings for python
+########################
+
+###TemFilePath###
+/Users/scorpio/Workspace/scorpio/skyfalling/algorithm/src/main/python
+
+###CodeFileName###
+$!velocityTool.camelCaseName(${question.titleSlug})
+
+###CodeTemplate###
+# ${question.frontendQuestionId}.${question.titleSlug}
+${question.content}
+${question.code}
+# test from here
+if __name__ == '__main__':
+    Solution()
