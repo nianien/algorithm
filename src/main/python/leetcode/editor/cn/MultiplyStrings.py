@@ -30,8 +30,15 @@ class Solution(object):
         :type num2: str
         :rtype: str
         """
-        num1 = num1[::-1]
-        num2 = num2[::-1]
+        return "".join(str(i) for i in self._multiply_arr(num1[::-1], num2[::-1]))
+
+    def _multiply_arr(self, num1, num2):
+        """
+        数组相乘,每个数组是单个数字
+        :param num1:
+        :param num2:
+        :return:
+        """
         len1 = len(num1)
         len2 = len(num2)
         len_ = len1 + len2
@@ -46,53 +53,36 @@ class Solution(object):
             mod = mod // 10
         if mod > 0:
             ret[-1] = mod
-        last = 0
+        return self._remove_zero(ret)
+
+    def _remove_zero(self, arr_):
+        """
+        移除高位0
+        :param arr_:
+        :return:
+        """
         # last no-zero
-        for i in range(len_ - 1, -1, -1):
-            if ret[i] != 0:
+        last = 0
+        for i in range(len(arr_) - 1, -1, -1):
+            if arr_[i] != 0:
                 last = i
                 break
-        # ret[last - len_:-len_ - 1:-1]) == ret[0:last + 1][::-1])
-        return "".join(str(i) for i in ret[0:last + 1][::-1])
-
-        # def _add_str(self, num1, num2):
-    #     ret = ""
-    #     mod = 0
-    #     num1 = num1[::-1]
-    #     num2 = num2[::-1]
-    #     len1 = len(num1)
-    #     len2 = len(num2)
-    #     for i in range(max(len1, len2)):
-    #         mod += ((int(num1[i]) if i < len1 else 0) + (int(num2[i]) if i < len2 else 0))
-    #         ret = str(mod % 10) + ret
-    #         mod = mod // 10
-    #     return ret
-    #
-    # def _add_arr(self, num1, num2):
-    #     mod = 0
-    #     len1 = len(num1)
-    #     len2 = len(num2)
-    #     ret = [0] * max(len1, len2)
-    #     for i in range(max(len1, len2)):
-    #         mod += ((num1[i] if i < len1 else 0) + (num2[i] if i < len2 else 0))
-    #         print(mod)
-    #         ret[i] = mod % 10
-    #         mod = mod // 10
-    #     if mod > 0:
-    #         ret[-1] = mod
-    #     return ret
+        # ret[last - len_:-len_ - 1:-1])
+        return arr_[0:last + 1][::-1]
 
 
 # leetcode submit region end(Prohibit modification and deletion)
 
 # test from here
+
+
 if __name__ == '__main__':
     print(Solution().multiply("33", "27"))
-    print(Solution().multiply("9", "9"))
-    print(Solution().multiply("2", "3"))
-    print(Solution().multiply("999", "0"))
-    arr = [1, 2, 3, 4, 5]
-    la = 2
-    le = len(arr)
-    print(arr[la - le:-le - 1:-1])
-    print(arr[0:la + 1][::-1])
+print(Solution().multiply("9", "9"))
+print(Solution().multiply("2", "3"))
+print(Solution().multiply("999", "0"))
+arr = [1, 2, 3, 4, 5]
+la = 2
+le = len(arr)
+print(arr[la - le:-le - 1:-1])
+print(arr[0:la + 1][::-1])
