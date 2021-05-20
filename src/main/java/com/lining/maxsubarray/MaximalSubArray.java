@@ -22,8 +22,8 @@ public class MaximalSubArray {
         int begin = 0;
         for (int i = 0; i < array.length; i++) {
             thisSum += array[i];
-            if (thisSum <= 0) {
-                thisSum = 0;
+            if (thisSum <= array[i]) {
+                thisSum = array[i];
                 begin = i + 1;
             }
             //若唯一，求最大子数组，否则求最短的最大子数组
@@ -45,4 +45,7 @@ public class MaximalSubArray {
         return subArray;
     }
 
+    public static void main(String[] args) {
+        new MaximalSubArray().max(new int[]{-1});
+    }
 }

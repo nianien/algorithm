@@ -30,17 +30,14 @@ class Solution(object):
         :type num2: str
         :rtype: str
         """
-        return "".join(str(i) for i in self._multiply_arr(num1[::-1], num2[::-1]))
-
-    def _multiply_arr(self, num1, num2):
         """
         数组相乘,每个数组是单个数字
         :param num1:
         :param num2:
         :return:
         """
-        len1 = len(num1)
-        len2 = len(num2)
+        num1, num2 = num1[::-1], num2[::-1]
+        len1, len2 = len(num1), len(num2)
         len_ = len1 + len2
         ret = [0] * len_
         for i in range(len1):
@@ -53,22 +50,13 @@ class Solution(object):
             mod = mod // 10
         if mod > 0:
             ret[-1] = mod
-        return self._remove_zero(ret)
-
-    def _remove_zero(self, arr_):
-        """
-        移除高位0
-        :param arr_:
-        :return:
-        """
-        # last no-zero
-        last = 0
-        for i in range(len(arr_) - 1, -1, -1):
-            if arr_[i] != 0:
-                last = i
+        last_none_zero = 1
+        # 移除高位0
+        for i in range(len(ret) - 1, -1, -1):
+            if ret[i] != 0:
+                last_none_zero = i + 1
                 break
-        # ret[last - len_:-len_ - 1:-1])
-        return arr_[0:last + 1][::-1]
+        return "".join(str(i) for i in ret[0:last_none_zero][::-1])
 
 
 # leetcode submit region end(Prohibit modification and deletion)
