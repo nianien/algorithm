@@ -60,9 +60,10 @@ class Solution(object):
         :type nums: List[int]
         :rtype: TreeNode
         """
-        print(begin,end)
+        print(begin, end)
         mid = (begin + end) // 2
         tree = TreeNode(nums[mid])
+        # 中间位置作为根节点, 较小部分作为左子树,较大部分作为右子树
         if mid > begin:
             tree.left = self.sortedArrayToBST_(nums, begin, mid - 1)
         if mid < end:
