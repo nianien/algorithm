@@ -67,7 +67,11 @@ class Solution(object):
             return nums[0]
         max_sum, cur_sum = nums[0], nums[0]
         for i in range(1, len(nums)):
-            # 如果当前sum为负数,则当前sum替换为当前元素,否则继续累加
+            # 如果cur_sum为负数,则丢弃,重新计算
+            # if cur_sum > 0:
+            #     cur_sum += nums[i]
+            # else:
+            #     cur_sum = nums[i]
             cur_sum = nums[i] + (cur_sum if cur_sum > 0 else 0)
             if cur_sum > max_sum:
                 max_sum = cur_sum
