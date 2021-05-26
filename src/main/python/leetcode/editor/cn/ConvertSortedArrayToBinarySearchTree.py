@@ -35,7 +35,7 @@
 #  👍 765 👎 0
 
 
-from leetcode.editor.cn.TypeDefined import TreeNode
+from leetcode.editor.defined import TreeNode
 
 
 # leetcode submit region begin(Prohibit modification and deletion)

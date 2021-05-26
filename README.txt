@@ -2,8 +2,13 @@
 settings for java
 ########################
 
+###TemFilePath###
+/Users/scorpio/Workspace/scorpio/skyfalling/algorithm/src/main/java
+
+###CodeFileName###
 $!velocityTool.camelCaseName(${question.titleSlug})
 
+###CodeTemplate###
 //${question.frontendQuestionId}.${question.titleSlug}
 ${question.content}
 
@@ -17,7 +22,7 @@ public class $!velocityTool.camelCaseName(${question.titleSlug}){
 
 
 ########################
-settings for python
+settings for scala
 ########################
 
 ###TemFilePath###
@@ -29,7 +34,7 @@ $!velocityTool.camelCaseName(${question.titleSlug})
 ###CodeTemplate###
 //${question.frontendQuestionId}.${question.titleSlug}
 ${question.content}
-package scala.leetcode.editor.cn;
+package leetcode.editor.cn;
 
 object $!velocityTool.camelCaseName(${question.titleSlug}) extends App{
   ${question.code}
@@ -50,8 +55,33 @@ $!velocityTool.camelCaseName(${question.titleSlug})
 
 ###CodeTemplate###
 # ${question.frontendQuestionId}.${question.titleSlug}
+from leetcode.editor.defined import *
 ${question.content}
 ${question.code}
 # test from here
 if __name__ == '__main__':
     Solution()
+
+
+
+########################
+settings for go
+########################
+
+###TemFilePath###
+/Users/scorpio/Workspace/scorpio/skyfalling/algorithm/src/main/go
+
+###CodeFileName###
+$!velocityTool.camelCaseName(${question.titleSlug})
+
+###CodeTemplate###
+//${question.frontendQuestionId}.${question.titleSlug}
+${question.content}
+package main;
+import "fmt"
+
+${question.code}
+//test from here
+func main() {
+    fmt.Println()
+}

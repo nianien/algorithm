@@ -32,7 +32,7 @@
 #  👍 400 👎 0
 
 
-from leetcode.editor.cn.TypeDefined import ListNode
+from leetcode.editor.defined import *
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
@@ -42,8 +42,10 @@ from leetcode.editor.cn.TypeDefined import ListNode
 #         self.val = val
 #         self.next = next
 
+
 class Solution(object):
-    def partition(self, head, x):
+    @staticmethod
+    def partition(head, x):
         """
          单链表拼接
         :type head: ListNode
@@ -104,5 +106,5 @@ class Solution(object):
 
 # test from here
 if __name__ == '__main__':
-    print(Solution().partition(ListNode.build(1, 4, 3, 2, 5, 2), 3))
-    print(Solution().partition(ListNode.build(1, 4, 3, 0, 2, 5, 2), 3))
+    print(Solution.partition(ListNode.build(1, 4, 3, 2, 5, 2), 3))
+    print(Solution.partition(ListNode.build(1, 4, 3, 0, 2, 5, 2), 3))

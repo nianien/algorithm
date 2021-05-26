@@ -1,12 +1,9 @@
-from typing import Tuple
-
-
 class ListNode(object):
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 
-    def __str__(self, next: Tuple = None):
+    def __str__(self):
         list_ = []
         current = self
         is_first = True
@@ -27,9 +24,3 @@ class ListNode(object):
             p.next = ListNode(value)
             p = p.next
         return h.next
-
-class TreeNode(object):
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right

@@ -30,11 +30,8 @@
 #  
 #  Related Topics 链表 
 #  👍 575 👎 0
-from sre_parse import Tokenizer
 
-from requests import Response
-
-from leetcode.editor.cn.TypeDefined import ListNode
+from leetcode.editor.defined import ListNode
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
