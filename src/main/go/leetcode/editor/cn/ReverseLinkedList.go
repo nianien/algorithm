@@ -44,9 +44,10 @@
 
 package main
 
-import . "main/go/leetcode/editor/cn/defined"
-
-import "fmt"
+import (
+	"fmt"
+	. "main/go/leetcode/editor/cn/defined"
+)
 
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
@@ -68,9 +69,21 @@ func reverseList(head *ListNode) *ListNode {
 	return prev
 }
 
+func test(head *ListNode) *ListNode {
+	head.Val = 10
+	return head
+}
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 //test from here
 func main() {
-	fmt.Println()
+
+	n1 := NewListNode(1, nil)
+	n2 := NewListNode(2, nil)
+	n3 := NewListNode(3, nil)
+	n1.Next = n2
+	n2.Next = n3
+	n3.Next = n1
+	fmt.Println(n1)
 }

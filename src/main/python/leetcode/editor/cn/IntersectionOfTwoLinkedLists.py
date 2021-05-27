@@ -97,19 +97,31 @@ class Solution:
     def getIntersectionNode2(self, headA: ListNode, headB: ListNode) -> ListNode:
         # 两个指针都移动a->b和b->a,如果相交,则一定会相遇
         # 若相交,则尾节点一致, 则往前推,必定同时遍历相交节点
-        if not headA or not headB:
-            return None;
-            p1 = headA
-            p2 = headB
-            while p1 != p2:
-                p1 = p2 if not p1 else p1.next
-                p2 = p1 if not p2 else p2.next
-        return p1
+        curr1, curr2 = headA, headB
+        while curr1 != curr2:
+            curr1 = curr1.next if curr1 else headB
+            curr2 = curr2.next if curr2 else headA
+
+        return curr1
 
 
 # leetcode submit region end(Prohibit modification and deletion)
 
 # test from here
 if __name__ == '__main__':
-    l = Solution().getIntersectionNode(ListNode.build(4, 1, 8, 4, 5), ListNode.build(5, 6, 1, 8, 4, 5))
-    print(l.val)
+    la = ListNode.build(4, 1)
+    lb = ListNode.build(5, 6, 1)
+    lc = ListNode.build(8, 4, 5)
+    tail = la
+    while tail.next:
+        tail = tail.next
+    tail.next = lc
+    print(la)
+    tail = lb
+    while tail.next:
+        tail = tail.next
+    tail.next = lc
+    print(lb)
+    node = Solution().getIntersectionNode2(la, lb)
+    print(node)
+

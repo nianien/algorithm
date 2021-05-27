@@ -1,8 +1,7 @@
 package leetcode.editor.java;
 
-import javax.xml.soap.Node;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ListNode {
     public int val;
@@ -32,18 +31,35 @@ public class ListNode {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("|");
         ListNode current = this;
-        boolean isFirst = true;
+        Map<ListNode, Integer> nodes = new HashMap<>();
+        int id = 1;
         while (current != null) {
-            if (isFirst) {
-                isFirst = false;
-            } else {
-                sb.append("->");
-            }
+            sb.append("->");
             sb.append(current.val);
+            if (nodes.containsKey(current)) {
+                sb.append("*(").append(nodes.get(current)).append(")");
+                break;
+            } else {
+                nodes.put(current, id++);
+            }
             current = current.next;
         }
         return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        ListNode n1 = new ListNode(1);
+        ListNode n2 = new ListNode(2);
+        ListNode n3 = new ListNode(1);
+        ListNode n4 = new ListNode(4);
+        ListNode n5 = new ListNode(5);
+        n1.next = n2;
+        n2.next = n3;
+        n3.next = n4;
+        n4.next = n5;
+        n5.next = n3;
+        System.out.println(n1);
     }
 }
