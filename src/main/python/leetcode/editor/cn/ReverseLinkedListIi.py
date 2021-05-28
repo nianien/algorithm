@@ -43,10 +43,9 @@ from leetcode.editor.defined import *
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-def reverse_linked_list(head: ListNode):
+def reverse_list(head: ListNode):
     # 也可以使用递归反转一个链表
-    pre = None
-    cur = head
+    pre, cur = None, head
     while cur:
         next_ = cur.next
         cur.next = pre
@@ -84,7 +83,7 @@ class Solution:
         right_.next = None
 
         # 第 4 步：反转链表的子区间
-        reverse_linked_list(left_)
+        reverse_list(left_)
         # 第 5 步：接回到原来的链表中
         pre.next = right_
         left_.next = cur_
