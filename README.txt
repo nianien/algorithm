@@ -60,7 +60,7 @@ ${question.content}
 ${question.code}
 # test from here
 if __name__ == '__main__':
-    Solution()
+    print(Solution())
 
 
 

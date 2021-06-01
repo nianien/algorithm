@@ -3,7 +3,7 @@
 
 
 class ListNode(object):
-    def __init__(self, val=0, next: 'ListNode' = None):
+    def __init__(self, val: int = 0, next: 'ListNode' = None):
         self.val = val
         self.next = next
 
@@ -27,7 +27,7 @@ class ListNode(object):
         return "".join(str(i) for i in list_)
 
     @staticmethod
-    def build(*values):
+    def build(*values: int):
         h = ListNode(-1)
         p = h
         for value in values:
