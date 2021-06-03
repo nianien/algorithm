@@ -51,11 +51,12 @@ class Solution:
 
         def backtrack(begin: int):
             # 所有数都填完了
-            if begin == n - 1:
+            if begin == n-1:
                 res.append(nums[:])
-                return 
+                return
             for i in range(begin, n):
                 # 动态维护数组
+                print("begin=", begin, "i=", i)
                 nums[begin], nums[i] = nums[i], nums[begin]
                 # 继续递归填下一个数
                 backtrack(begin + 1)
@@ -72,4 +73,4 @@ class Solution:
 
 # test from here
 if __name__ == '__main__':
-    print(Solution())
+    print(Solution().permute([0, 1, 2]))
