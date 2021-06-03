@@ -65,13 +65,12 @@ class Solution:
         :param head:
         :return:
         """
-        pre_sum = defaultdict(ListNode)
+        pre_sum = defaultdict()
         dummy = ListNode(next=head)
         p = dummy
         sum_ = 0
         while p:
             sum_ += p.val
-
             pre_sum[sum_] = p  # 前缀和的尾结点
             p = p.next
         sum_ = 0
