@@ -49,9 +49,10 @@ class Solution:
         if not digits:
             return []
 
-        def backtrack(idx: int):
+        def backtrack(idx: int, temp: List[str]):
             """
             idx为当前按键位置
+            :param temp:
             :param idx:
             :return:
             """
@@ -59,17 +60,33 @@ class Solution:
                 res.append("".join(temp))
                 return
             # print("i=>", i)
-            for ch in letters[int(digits[idx]) - 2]:
+            for ch in keys[int(digits[idx]) - 2]:
                 # 选择完当前按键, 然后选择下一个按键
                 temp[idx] = ch
-                backtrack(idx + 1)
+                backtrack(idx + 1, temp)
 
-        letters = ["abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
+        keys = ["abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
         n = len(digits)
-        temp = [''] * n
         res = []
-        backtrack(0)
+        backtrack(0, [''] * n)
         return res
+
+    def letterCombinations_by_dp(self, digits):
+        """
+        动态规划
+        dp[i]: 前i个字母的所有组合
+        由于dp[i]只与dp[i-1]有关,可以使用变量代替列表存储降低空间复杂度
+        :type digits: str
+        :rtype: List[str]
+        """
+        if not digits:
+            return []
+        keys = ["abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
+        dp = ['']
+        for num in digits:
+            # pre表示前i个字母的组合,cur表示当前字母含义
+            dp = [pre + cur for pre in dp for cur in keys[int(num)-2]]
+        return dp
 
 
 # leetcode submit region end(Prohibit modification and deletion)
@@ -77,3 +94,4 @@ class Solution:
 # test from here
 if __name__ == '__main__':
     print(Solution().letterCombinations("22"))
+    print(Solution().letterCombinations_by_dp("22"))
