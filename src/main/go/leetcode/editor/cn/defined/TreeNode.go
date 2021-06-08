@@ -17,5 +17,5 @@ func NewTreeNode(val int, left *TreeNode, right *TreeNode) *TreeNode {
 }
 
 func (node TreeNode) String() string {
-	return fmt.Sprintf("%d", node.Val)
+	return fmt.Sprintf("[val:%d]", node.Val)
 }

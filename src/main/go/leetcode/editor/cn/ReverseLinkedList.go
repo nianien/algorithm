@@ -69,11 +69,6 @@ func reverseList(head *ListNode) *ListNode {
 	return prev
 }
 
-func test(head *ListNode) *ListNode {
-	head.Val = 10
-	return head
-}
-
 //leetcode submit region end(Prohibit modification and deletion)
 
 //test from here
@@ -85,5 +80,5 @@ func main() {
 	n1.Next = n2
 	n2.Next = n3
 	n3.Next = n1
-	fmt.Println(n1)
+	fmt.Println(reverseList(n1))
 }
