@@ -77,19 +77,35 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 //leetcode submit region begin(Prohibit modification and deletion)
 func romanToInt(s string) int {
-	for _, c := range s {
-		fmt.Printf("Unicode: %c  %d\n", c, c)
+	var nums = make(map[string]int)
+	//I， V， X， L，C，D 和 M
+	nums["I"] = 1
+	nums["V"] = 5
+	nums["X"] = 10
+	nums["L"] = 50
+	nums["C"] = 100
+	nums["D"] = 500
+	nums["M"] = 1000
+	var ans = 0
+	for i := range s {
+		if i < len(s)-1 && nums[string(s[i])] < nums[string(s[i+1])] {
+			ans -= nums[string(s[i])]
+		} else {
+			ans += nums[string(s[i])]
+		}
 	}
-	return 0
+	return ans
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
 
 //test from here
 func main() {
-	fmt.Println(romanToInt("abc"))
+	fmt.Println(romanToInt("IV"))
 }

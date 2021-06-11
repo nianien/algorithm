@@ -59,7 +59,7 @@ package leetcode.editor.cn;
 
 public class ZigzagConversion {
     public static void main(String[] args) {
-        Solution solution = new ZigzagConversion().new Solution();
+        var solution = new ZigzagConversion().new Solution();
         System.out.println(solution.convert("PAYPALISHIRING", 3));
         System.out.println(solution.convert("ABCD", 2));
     }
