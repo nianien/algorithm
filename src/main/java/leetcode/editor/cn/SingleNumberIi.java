@@ -23,6 +23,7 @@ package leetcode.editor.cn;
 public class SingleNumberIi {
     public static void main(String[] args) {
         Solution solution = new SingleNumberIi().new Solution();
+        System.out.println( solution.singleNumber(new int[]{2,2,3,2}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
