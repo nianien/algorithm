@@ -77,7 +77,7 @@ $!velocityTool.camelCaseName(${question.titleSlug})
 ###CodeTemplate###
 //${question.frontendQuestionId}.${question.titleSlug}
 ${question.content}
-package main;
+package main
 import "fmt"
 
 ${question.code}
