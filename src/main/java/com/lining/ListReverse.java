@@ -1,6 +1,6 @@
 package com.lining;
 
-import leetcode.editor.cn.java.ListNode;
+import leetcode.editor.cn.defined.java.ListNode;
 
 /**
  * scm.com Inc.

@@ -48,7 +48,7 @@
 
 package leetcode.editor.cn
 
-import leetcode.editor.cn.scala.ListNode
+import leetcode.editor.cn.defined.scala.ListNode
 
 
 object MergeKSortedLists extends App {

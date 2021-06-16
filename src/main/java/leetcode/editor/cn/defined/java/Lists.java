@@ -1,4 +1,4 @@
-package leetcode.editor.cn.java;
+package leetcode.editor.cn.defined.java;
 
 import java.util.Arrays;
 import java.util.List;

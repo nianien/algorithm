@@ -49,7 +49,7 @@
 
 package leetcode.editor.cn;
 
-import leetcode.editor.cn.java.Lists;
+import leetcode.editor.cn.defined.java.Lists;
 
 public class RotateArray {
     public static void main(String[] args) {

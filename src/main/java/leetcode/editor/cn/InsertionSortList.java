@@ -35,7 +35,7 @@
 package leetcode.editor.cn;
 
 
-import leetcode.editor.cn.java.ListNode;
+import leetcode.editor.cn.defined.java.ListNode;
 
 public class InsertionSortList{
   public static void main(String[] args) {
