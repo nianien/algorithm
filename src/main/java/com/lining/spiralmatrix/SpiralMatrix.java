@@ -93,7 +93,6 @@ public class SpiralMatrix {
         IntStream.rangeClosed(p1.x, p2.x - 1).map(i -> p2.x + p1.x - 1 - i).filter(i -> p1.y < p2.y).forEach(i -> handler.doHandle(i, p2.y));
         //向左, 行不变,列递减
         IntStream.rangeClosed(p1.y + 1, p2.y - 1).map(i -> p1.y + p2.y - i).filter(i -> p1.x < p2.x).forEach(i -> handler.doHandle(p1.x, i));
-        // 此时P1,p2坐标已复位
         p1.increase(1, 1);
         p2.decrease(1, 1);
 
