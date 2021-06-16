@@ -1,6 +1,8 @@
 package com.lining.spiralmatrix;
 
 
+import java.util.stream.IntStream;
+
 /**
  * 螺旋矩阵
  *
@@ -25,6 +27,7 @@ public class SpiralMatrix {
 
         @Override
         public void doHandle(int i, int j) {
+            System.out.println("(" + i + "," + j + ")");
             this.array[i][j] = ++n;
 
         }
@@ -60,21 +63,13 @@ public class SpiralMatrix {
             return;
 
         //向右, 行不变, 列增加
-        for (int i = p1.x, j = p1.y; j <= p2.y; j++) {
-            handler.doHandle(i, j);
-        }
+        IntStream.rangeClosed(p1.y, p2.y).forEach(i -> handler.doHandle(p1.x, i));
         //向下, 列不变,行增加
-        for (int i = p1.x + 1, j = p2.y; i <= p2.x; i++) {
-            handler.doHandle(i, j);
-        }
+        IntStream.rangeClosed(p1.x + 1, p2.x).forEach(i -> handler.doHandle(i, p2.y));
         //向左, 行不变,列递减
-        for (int i = p2.x, j = p2.y - 1; j >= p1.y; j--) {
-            handler.doHandle(i, j);
-        }
+        IntStream.rangeClosed(p1.y, p2.y - 1).map(i -> p1.y + p2.y - 1 - i).filter(i -> p1.x < p2.x).forEach(i -> handler.doHandle(p2.x, i));
         //向上, 列不变,行递减
-        for (int i = p2.x-1, j = p1.y; i > p1.y; i--) {
-            handler.doHandle(i, j);
-        }
+        IntStream.rangeClosed(p1.x + 1, p2.x - 1).map(i -> p2.x + p1.x - i).filter(i -> p1.y < p2.y).forEach(i -> handler.doHandle(i, p1.y));
 
 
      /*
