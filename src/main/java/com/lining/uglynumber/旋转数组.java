@@ -1,4 +1,4 @@
-package com.lining;
+package com.lining.uglynumber;
 
 /**
  * 折叠数组
