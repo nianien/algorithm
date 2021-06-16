@@ -27,7 +27,6 @@ public class SpiralMatrix {
 
         @Override
         public void doHandle(int i, int j) {
-            System.out.println("(" + i + "," + j + ")");
             this.array[i][j] = ++n;
 
         }
@@ -61,7 +60,6 @@ public class SpiralMatrix {
     public static void clockwise(Point p1, Point p2, CoordinateHandler handler) {
         if (!p1.le(p2))
             return;
-
         //向右, 行不变, 列增加
         IntStream.rangeClosed(p1.y, p2.y).forEach(i -> handler.doHandle(p1.x, i));
         //向下, 列不变,行增加
@@ -71,35 +69,6 @@ public class SpiralMatrix {
         //向上, 列不变,行递减
         IntStream.rangeClosed(p1.x + 1, p2.x - 1).map(i -> p2.x + p1.x - i).filter(i -> p1.y < p2.y).forEach(i -> handler.doHandle(i, p1.y));
 
-
-     /*
-        int cols = p2.y - p1.y;
-        int rows = p2.x - p1.x;
-        // 起止步骤,0为第一步,end不执行
-        int start = 0, end = 0;
-        // 走一圈,横向开始
-        if (cols > 0 && rows > 0) {
-            end = 4;
-        } else if (cols > 0) { // 横向走作为第一步
-            end = 1;
-        } else if (rows > 0) { // 纵向走作为第二步
-            start = 1;
-            end = 2;
-        }
-        for (int step = start; step < end; step++) {
-            int num = step % 2 == 0 ? cols : rows;
-            for (int i = 0; i < num; i++) {
-                handler.doHandle(p1.x, p1.y);
-                p1.x += (2 - step) * (step & 1);
-                p1.y += (1 - step) * ((step + 1) & 1);
-            }
-        }
-        // 未走一圈,则需要访问最后一个坐标
-        if (end != 4) {
-            handler.doHandle(p1.x, p1.y);
-            return;
-        }*/
-        // 此时P1,p2坐标已复位
         p1.increase(1, 1);
         p2.decrease(1, 1);
         clockwise(p1, p2, handler);
@@ -116,32 +85,14 @@ public class SpiralMatrix {
                                         CoordinateHandler handler) {
         if (!p1.le(p2))
             return;
-        int cols = p2.y - p1.y;
-        int rows = p2.x - p1.x;
-        // 起止步骤,0为第一步,end不执行
-        int start = 0, end = 0;
-        // 走一圈,纵向开始
-        if (cols > 0 && rows > 0) {
-            end = 4;
-        } else if (rows > 0) { // 纵向走作为第一步,start=0
-            end = 1;
-        } else if (cols > 0) { // 横向走作为第二步,start=1
-            start = 1;
-            end = 2;
-        }
-        for (int step = start; step < end; step++) {
-            int num = step % 2 == 0 ? rows : cols;
-            for (int i = 0; i < num; i++) {
-                handler.doHandle(p1.x, p1.y);
-                p1.x += (1 - step) * ((step + 1) & 1);
-                p1.y += (2 - step) * (step & 1);
-            }
-        }
-        // 未走一圈,则需要访问最后一个坐标
-        if (end != 4) {
-            handler.doHandle(p1.x, p1.y);
-            return;
-        }
+        //向下, 列不变,行增加
+        IntStream.rangeClosed(p1.x, p2.x).forEach(i -> handler.doHandle(i, p1.y));
+        //向右, 行不变, 列增加
+        IntStream.rangeClosed(p1.y + 1, p2.y).forEach(i -> handler.doHandle(p2.x, i));
+        //向上, 列不变,行递减
+        IntStream.rangeClosed(p1.x, p2.x - 1).map(i -> p2.x + p1.x - 1 - i).filter(i -> p1.y < p2.y).forEach(i -> handler.doHandle(i, p2.y));
+        //向左, 行不变,列递减
+        IntStream.rangeClosed(p1.y + 1, p2.y - 1).map(i -> p1.y + p2.y - i).filter(i -> p1.x < p2.x).forEach(i -> handler.doHandle(p1.x, i));
         // 此时P1,p2坐标已复位
         p1.increase(1, 1);
         p2.decrease(1, 1);
