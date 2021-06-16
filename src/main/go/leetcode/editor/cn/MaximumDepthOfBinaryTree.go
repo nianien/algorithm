@@ -51,5 +51,8 @@ func maxDepth(root *TreeNode) int {
 
 //test from here
 func main() {
-	fmt.Println()
+	var root = NewTreeNode(3,
+		NewTreeNode(9, nil, nil),
+		NewTreeNode(20, NewTreeNode(15, nil, nil), NewTreeNode(7, nil, nil)))
+	fmt.Println(maxDepth(root))
 }
