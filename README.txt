@@ -56,7 +56,7 @@ $!velocityTool.camelCaseName(${question.titleSlug})
 ###CodeTemplate###
 # ${question.frontendQuestionId}.${question.titleSlug}
 ${question.content}
-from leetcode.editor.defined import *
+from leetcode.editor.cn.defined import *
 ${question.code}
 # test from here
 if __name__ == '__main__':

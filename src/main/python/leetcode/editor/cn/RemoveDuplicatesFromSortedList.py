@@ -31,7 +31,7 @@
 #  Related Topics 链表 
 #  👍 575 👎 0
 
-from leetcode.editor.defined import ListNode
+from leetcode.editor.cn.defined import *
 
 
 # leetcode submit region begin(Prohibit modification and deletion)

@@ -21,7 +21,7 @@
 
 package leetcode.editor.cn;
 
-import leetcode.editor.java.Lists;
+import leetcode.editor.cn.java.Lists;
 
 public class DaYinCong1daoZuiDaDeNweiShuLcof {
     public static void main(String[] args) {

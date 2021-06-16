@@ -41,7 +41,7 @@
 #  Related Topics 递归 链表 
 #  👍 922 👎 0
 
-from leetcode.editor.defined import *
+from leetcode.editor.cn.defined import *
 
 
 # leetcode submit region begin(Prohibit modification and deletion)

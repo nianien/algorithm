@@ -1,11 +1,11 @@
-package com.lining.uglynumber;
+package com.lining;
 
 /**
  * 折叠数组
  * scm.com Inc.
  * Copyright (c) 2004-2021 All Rights Reserved.
  */
-public class 旋转数组 {
+public class BinarySearch {
 
     public static void main(String[] args) {
         //旋转数组

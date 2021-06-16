@@ -1,4 +1,4 @@
-package leetcode.editor.scala
+package leetcode.editor.cn.scala
 
 import scala.collection.mutable.Map
 import scala.util.control.Breaks

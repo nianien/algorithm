@@ -41,7 +41,7 @@
 
 from collections import defaultdict
 
-from leetcode.editor.defined import *
+from leetcode.editor.cn.defined import *
 
 
 # leetcode submit region begin(Prohibit modification and deletion)

@@ -23,7 +23,7 @@
 #  Related Topics 链表 
 #  👍 427 👎 0
 
-from leetcode.editor.defined import *
+from leetcode.editor.cn.defined import *
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
