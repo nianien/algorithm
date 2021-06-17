@@ -91,12 +91,14 @@ public class CountCompleteTreeNodes {
             if (root.left == null && root.right == null) {
                 return 1;
             }
-            int left = countLevel(root.left);
-            int right = countLevel(root.right);
-            if (left == right) {
-                return countNodes(root.right) + (1 << left);
+            int lh = countLevel(root.left);
+            int rh = countLevel(root.right);
+            if (lh == rh) {
+                //左子树为满二叉树，左子树+根节点的总数为1<<lh
+                return countNodes(root.right) + (1 << lh);
             } else {
-                return countNodes(root.left) + (1 << right);
+                //右子树为满二叉树，右子树+根节点的总数为1<<rh
+                return countNodes(root.left) + (1 << rh);
             }
         }
 
