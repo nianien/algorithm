@@ -72,17 +72,50 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 //leetcode submit region begin(Prohibit modification and deletion)
 func intToRoman(num int) string {
-	//TODO
-	return ""
+	var keymap = map[int]string{
+		1:    "I",
+		4:    "IV",
+		5:    "V",
+		9:    "IX",
+		10:   "X",
+		40:   "XL",
+		50:   "L",
+		90:   "XC",
+		100:  "C",
+		400:  "CD",
+		500:  "D",
+		900:  "CM",
+		1000: "M",
+	}
+	var keys []int
+	for key := range keymap {
+		keys = append(keys, key)
+	}
+	//按照从大到小排序
+	sort.Slice(keys, func(i, j int) bool {
+		return keys[i] > keys[j]
+	})
+	var roman []byte
+	//逆序从大到小判断
+	for _, key := range keys {
+		for num >= key {
+			num -= key
+			roman = append(roman, keymap[key]...)
+		}
+	}
+	return string(roman)
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
 
 //test from here
 func main() {
-	fmt.Println()
+	fmt.Println(intToRoman(1994))
 }
