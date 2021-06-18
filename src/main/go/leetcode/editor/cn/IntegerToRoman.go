@@ -79,14 +79,15 @@ import (
 
 //leetcode submit region begin(Prohibit modification and deletion)
 
+//把每个位数的所有可能枚举出来，然后直接输出每位的表示
+var (
+	thousands = []string{"", "M", "MM", "MMM"}
+	hundreds  = []string{"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"}
+	tens      = []string{"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"}
+	ones      = []string{"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"}
+)
+
 func intToRoman(num int) string {
-	//把每个位数的所有可能枚举出来，然后直接输出每位的表示
-	var (
-		thousands = []string{"", "M", "MM", "MMM"}
-		hundreds  = []string{"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"}
-		tens      = []string{"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"}
-		ones      = []string{"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"}
-	)
 	return thousands[num/1000] + hundreds[num%1000/100] + tens[num%100/10] + ones[num%10]
 }
 
