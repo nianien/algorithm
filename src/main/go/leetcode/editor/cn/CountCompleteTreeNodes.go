@@ -74,12 +74,16 @@ func countNodes(root *TreeNode) int {
 	//由上，则第一个叶子节点的顺序为k=2^h,任意一个叶子节点的顺序为[2^h,2^(h+1)-1]
 	//假设一个叶子节点对应的二进制为110001,则表示根->右->左->左->左->右的路径，通过该路径就可以找到该叶子节点，并判断是否为空
 	//如果为空，则说明该叶子节点不存在，二分查找最后一个叶子节点，其对应二进制表示就是节点总数
+
+	//2^h
 	var low = 1 << level
-	var high = (1 << (level + 1)) - 1
+	//2^(h+1)-1
+	var high = (1 << level << 1) - 1
 	for low < high {
 		//注：加1中间偏右，不加1中间偏左
 		var mid = (high + low + 1) / 2
 		if exists(root, level, mid) {
+			//这里mid一定存在，所以返回值为low的边界值
 			low = mid
 		} else {
 			high = mid - 1
@@ -116,4 +120,6 @@ func main() {
 		NewTreeNode(2, NewTreeNode(4, nil, nil), NewTreeNode(5, nil, nil)),
 		NewTreeNode(3, nil, nil))
 	fmt.Println(countNodes(root))
+	fmt.Println(1 << 3 << 1)
+	fmt.Println(1 << (3 + 1))
 }
