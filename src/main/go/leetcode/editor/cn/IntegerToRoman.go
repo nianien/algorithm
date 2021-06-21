@@ -74,7 +74,6 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
 //leetcode submit region begin(Prohibit modification and deletion)
@@ -92,35 +91,56 @@ func intToRoman(num int) string {
 }
 
 func intToRoman2(num int) string {
-	var keymap = map[int]string{
-		1:    "I",
-		4:    "IV",
-		5:    "V",
-		9:    "IX",
-		10:   "X",
-		40:   "XL",
-		50:   "L",
-		90:   "XC",
-		100:  "C",
-		400:  "CD",
-		500:  "D",
-		900:  "CM",
-		1000: "M",
+
+	//struct literal
+	var keys = []struct {
+		k int
+		v string
+	}{
+		{1000, "M"},
+		{900, "CM"},
+		{500, "D"},
+		{400, "CD"},
+		{100, "C"},
+		{90, "XC"},
+		{50, "L"},
+		{40, "XL"},
+		{10, "X"},
+		{9, "IX"},
+		{5, "V"},
+		{4, "IV"},
+		{1, "I"},
 	}
-	var keys []int
-	for key := range keymap {
-		keys = append(keys, key)
-	}
-	//按照从大到小排序
-	sort.Slice(keys, func(i, j int) bool {
-		return keys[i] > keys[j]
-	})
+	/*
+			var keymap = map[int]string{
+			1:    "I",
+			4:    "IV",
+			5:    "V",
+			9:    "IX",
+			10:   "X",
+			40:   "XL",
+			50:   "L",
+			90:   "XC",
+			100:  "C",
+			400:  "CD",
+			500:  "D",
+			900:  "CM",
+			1000: "M",
+		}
+		var keys []int
+		for key := range keymap {
+			keys = append(keys, key)
+		}
+		//按照从大到小排序
+		sort.Slice(keys, func(i, j int) bool {
+			return keys[i] > keys[j]
+		})*/
 	var roman []byte
-	//逆序从大到小判断
+	//从大到小判断
 	for _, key := range keys {
-		for num >= key {
-			num -= key
-			roman = append(roman, keymap[key]...)
+		for num >= key.k {
+			num -= key.k
+			roman = append(roman, key.v...)
 		}
 	}
 	return string(roman)
@@ -130,5 +150,5 @@ func intToRoman2(num int) string {
 
 //test from here
 func main() {
-	fmt.Println(intToRoman(1994))
+	fmt.Println(intToRoman2(1994))
 }
