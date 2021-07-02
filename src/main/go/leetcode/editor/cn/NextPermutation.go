@@ -72,6 +72,7 @@ func nextPermutation(nums []int) {
 		//对于右半部分，直接升序排列
 		var t = r
 		for i := r; i < l; i++ {
+			//大于nums[r-1]的最小值
 			if nums[i] > nums[r-1] && nums[i] < nums[t] {
 				t = i
 			}
@@ -83,7 +84,7 @@ func nextPermutation(nums []int) {
 }
 
 /**
-end已到begin位置，然后和j交换
+begin和end交换位置，然后begin之后升序排序
 */
 func minSwap(nums []int, begin int, end int) {
 	//交换数据
