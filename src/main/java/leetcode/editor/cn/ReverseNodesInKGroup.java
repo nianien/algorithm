@@ -104,7 +104,7 @@ public class ReverseNodesInKGroup {
         }
 
         /**
-         * 左开右闭, 返回翻转后的表头,即tail前一个节点
+         * 翻转从head(含)到tail(不含)的链表,返回翻转后的表头,即tail前一个节点
          *
          * @param head
          * @param tail
