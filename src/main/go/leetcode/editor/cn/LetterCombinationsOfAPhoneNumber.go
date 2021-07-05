@@ -46,6 +46,8 @@ import (
 	"strings"
 )
 
+//leetcode submit region begin(Prohibit modification and deletion)
+
 var keys = [8]string{
 	"abc",
 	"def",
@@ -70,8 +72,6 @@ func backtrack(idx int, digits string, res []string) {
 	}
 
 }
-
-//leetcode submit region begin(Prohibit modification and deletion)
 func letterCombinations(digits string) []string {
 	backtrack(0, digits, make([]string, len(digits)))
 	return ans

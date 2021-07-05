@@ -69,13 +69,13 @@ class Solution:
             remainder = (remainder + nums[i]) % k
             if remainder == 0 and i > 0:
                 # 如果前缀和被K整除即返回,因此表明从数组开始到当前位置和第一次满足条件
-                print(nums[:i + 1])
+                # print(nums[:i + 1])
                 return True
             if remainder in idx_remainder:
                 pre_idx = idx_remainder[remainder]
                 if i - pre_idx > 1:
                     # 打印满足条件的序列
-                    print(nums[pre_idx:i + 1])
+                    # print(nums[pre_idx:i + 1])
                     return True
             else:
                 idx_remainder[remainder] = i
