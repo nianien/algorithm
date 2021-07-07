@@ -41,7 +41,7 @@ import (
 //leetcode submit region begin(Prohibit modification and deletion)
 
 import (
-	. "container/list"
+	"container/list"
 )
 
 /**
@@ -63,29 +63,27 @@ func isSymmetricList2(root *TreeNode) bool {
 	if root == nil || root.Left == nil && root.Right == nil {
 		return true
 	}
-	q := New()
+	q := list.New()
 	q.PushFront(root.Left)
 	q.PushFront(root.Right)
 	// 这里是迭代判断,即先比较最左子树左节点和右子树右节点
 	// 再比较左子树右节点和右子树左节点
 	for q.Len() > 0 {
-		var u = q.Front().Value.(*TreeNode)
-		q.Remove(q.Front())
-		var v = q.Front().Value.(*TreeNode)
-		q.Remove(q.Front())
-		if u == nil && v == nil {
+		var l = q.Remove(q.Front()).(*TreeNode)
+		var r = q.Remove(q.Front()).(*TreeNode)
+		if l == nil && r == nil {
 			continue
-		} else if u == nil || v == nil {
+		} else if l == nil || r == nil {
 			return false
-		} else if u.Val != v.Val {
+		} else if l.Val != r.Val {
 			return false
 		}
 		//这里对称加入队列,即<左.左,右.右>,<左.右,右.左>
 		//在后续遍历时可以保持对称访问
-		q.PushFront(u.Left)
-		q.PushFront(v.Right)
-		q.PushFront(u.Right)
-		q.PushFront(v.Left)
+		q.PushFront(l.Left)
+		q.PushFront(r.Right)
+		q.PushFront(l.Right)
+		q.PushFront(r.Left)
 	}
 	return true
 
@@ -95,7 +93,7 @@ func isSymmetricList2(root *TreeNode) bool {
 层次遍历,判断是否为回文数组
 */
 func isSymmetricLevel(root *TreeNode) bool {
-	l := New()
+	l := list.New()
 	l.PushFront(root)
 	for l.Len() > 0 {
 		if !isSymmetricVal(l) {
@@ -104,12 +102,10 @@ func isSymmetricLevel(root *TreeNode) bool {
 		// 逆序是为了节省链表长度变量
 		// 将上一层的节点从前端删除,下一层的节点在尾端添加
 		for i := l.Len(); i > 0; i-- {
-			var h = l.Front()
-			l.Remove(h)
-			var node = h.Value.(*TreeNode)
-			if node != nil {
-				l.PushBack(node.Left)
-				l.PushBack(node.Right)
+			var head = l.Remove(l.Front()).(*TreeNode)
+			if head != nil {
+				l.PushBack(head.Left)
+				l.PushBack(head.Right)
 			}
 		}
 	}
@@ -119,23 +115,23 @@ func isSymmetricLevel(root *TreeNode) bool {
 /**
 判断是否回文数组
 */
-func isSymmetricVal(l *List) bool {
+func isSymmetricVal(l *list.List) bool {
 	if l.Len() <= 1 {
 		return true
 	}
-	var f = l.Front()
-	var b = l.Back()
-	//已经相遇  b.Next()==f ||f==b
-	for f != b && b.Next() != f {
-		var v1 = f.Value.(*TreeNode)
-		var v2 = b.Value.(*TreeNode)
+	var head = l.Front()
+	var tail = l.Back()
+	//判断相遇  tail.Next()==head || head==tail
+	for head != tail && tail.Next() != head {
+		var v1 = head.Value.(*TreeNode)
+		var v2 = tail.Value.(*TreeNode)
 		if v1 == nil && v2 != nil ||
 			v1 != nil && v2 == nil ||
 			v1 != nil && v2 != nil && v1.Val != v2.Val {
 			return false
 		}
-		f = f.Next()
-		b = b.Prev()
+		head = head.Next()
+		tail = tail.Prev()
 	}
 	return true
 }
@@ -151,5 +147,7 @@ func main() {
 		NewTreeNode(2, nil, nil),
 		NewTreeNode(2, nil, NewTreeNode(2, nil, nil)))
 	fmt.Println(isSymmetric(root))
+	fmt.Println(isSymmetricList2(root))
+	fmt.Println(isSymmetric(root2))
 	fmt.Println(isSymmetricList2(root2))
 }

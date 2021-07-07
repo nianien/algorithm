@@ -29,7 +29,10 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 //leetcode submit region begin(Prohibit modification and deletion)
 func generateParenthesis(n int) []string {
@@ -80,19 +83,15 @@ func doGenerateParenthesis(s string, p string, n int, m int, nl int, nr int, ml 
 	if ml < m {
 		doGenerateParenthesis(s+"{", p+"{", n, m, nl, nr, ml+1, mr, ans)
 	}
-	if mr < ml && hasSuffix(p, "{") {
+	if mr < ml && strings.HasSuffix(p, "{") {
 		doGenerateParenthesis(s+"}", p[0:len(p)-1], n, m, nl, nr, ml, mr+1, ans)
 	}
 	if nl < n {
 		doGenerateParenthesis(s+"(", p+"(", n, m, nl+1, nr, ml, mr, ans)
 	}
-	if nr < nl && hasSuffix(p, "(") {
+	if nr < nl && strings.HasSuffix(p, "(") {
 		doGenerateParenthesis(s+")", p[0:len(p)-1], n, m, nl, nr+1, ml, mr, ans)
 	}
-}
-
-func hasSuffix(s, suffix string) bool {
-	return len(s) >= len(suffix) && s[len(s)-len(suffix):] == suffix
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
