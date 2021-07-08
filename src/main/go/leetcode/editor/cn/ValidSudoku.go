@@ -79,9 +79,9 @@ func isValidSudoku(board [][]byte) bool {
 					  这里指针引用,保证属性变化可见
 					*/
 					v = &Position{
-						Xs: map[int]int{},
-						Ys: map[int]int{},
-						Ns: map[int]int{},
+						Xs: [9]bool{},
+						Ys: [9]bool{},
+						Rs: [9]bool{},
 					}
 					m[c] = v
 				}
@@ -98,27 +98,28 @@ type Position struct {
 	/**
 	  横坐标集合
 	*/
-	Xs map[int]int
+	Xs [9]bool
 	/**
 	  纵坐标集合
 	*/
-	Ys map[int]int
+	Ys [9]bool
 	/**
 	  区域集合
 	*/
-	Ns map[int]int
+	Rs [9]bool
 }
 
 /**
-检查map的键值是否存在, 如果不存在,添加返回true,否则返回false
+检查数组是否存在K, 0<=k<=9, 如果不存在返回true,否则返回false
 */
-func putIfAbsent(m map[int]int, k int) bool {
-	if _, ok := m[k]; !ok {
-		m[k] = 1
-		return true
-	} else {
+func putIfAbsent(arr *[9]bool, k int) bool {
+	if arr[k] {
 		return false
+	} else {
+		arr[k] = true
+		return true
 	}
+
 }
 
 // Check /**
@@ -126,7 +127,7 @@ func putIfAbsent(m map[int]int, k int) bool {
 判断x,y坐标以及所在区域块是否重复
 */
 func (this *Position) Check(x int, y int) bool {
-	return putIfAbsent(this.Xs, x) && putIfAbsent(this.Ys, y) && putIfAbsent(this.Ns, x/3+(y/3)*3)
+	return putIfAbsent(&this.Xs, x) && putIfAbsent(&this.Ys, y) && putIfAbsent(&this.Rs, x/3*3+y/3)
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
