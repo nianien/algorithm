@@ -49,41 +49,73 @@ import (
 
 //leetcode submit region begin(Prohibit modification and deletion)
 
-import (
-	"container/list"
-)
+func longestValidParentheses(s string) int {
+	return longestValidParentheses2(s)
+}
 
 /**
-利用栈,使用i来记录当前遍历到的位置，使用 j 来记录最近的最长有效括号的开始位置的「前一个位置」
+利用栈记录未匹配元素的索引，首先栈底元素存储最后一个未匹配的")"的索引位置, 如此, 则栈顶元素为当前最长有效括号起始位置的前一个位置
+那么，当前有效括号的长度=当前索引位置-栈顶元素的索引位置
 */
-func longestValidParentheses(s string) int {
-	//i为当前遍历到的元素，如果s[i]为")", 则包含该元素的最长有效括号为连续已匹配括号前的位置
-	//该位置的元素要么为"(", 要么为最后一个未匹配的")"
-	//计算当前括号有效长度时, 先出栈,如果出栈后,栈为空,则说明当前")"为匹配, 则更新最后一个未匹配的")"索引位置
-	//否则,计算当前括号长度为:i-栈顶元素的索引,然后更新最大值
+func longestValidParentheses1(s string) int {
 	maxAns := 0
-	var stack = list.New()
-	stack.PushBack(-1)
+	//为了统一边界处理, 栈底元素")"的索引初始为-1
+	var stack = []int{-1}
 	for i := 0; i < len(s); i++ {
 		if s[i] == '(' {
-			stack.PushBack(i)
+			stack = append(stack, i)
 		} else {
 			//弹出栈顶元素
-			var tail = stack.Remove(stack.Back()).(int)
-			if s[tail] == '(' {
-				//出栈元素为"(", 说明当前完成括号匹配,可以计算当前括号长度
-				//此时栈顶元素为当前最长有效括号起始位置的前一个位置, 要么是"(",要么是未匹配的")"
-				var tail = stack.Back().Value.(int)
-				maxAns = max_32(i-tail, maxAns)
+			stack = stack[:len(stack)-1]
+			if len(stack) == 0 {
+				//栈为空,说明出栈元素为")",未完成当前匹配, 需要更新未匹配")"的索引位置,重新入栈
+				stack = append(stack, i)
 			} else {
-				//出栈元素为")",则说明栈已空,更新未匹配的")"
-				stack.PushBack(i)
+				//栈不为空,说明出栈元素为"(", 完成当前括号匹配,此时可以计算当前有效括号长度
+				//栈顶元素为当前最长有效括号起始位置的前一个位置, 要么是"(",要么是未匹配的")"
+				maxAns = max_32(i-stack[len(stack)-1], maxAns)
 			}
 		}
 	}
 	return maxAns
 }
 
+/**
+  用栈模拟一遍，将所有能够匹配的括号的位置全部置1, 问题等价于求元素连续为1的最大长度
+*/
+func longestValidParentheses2(s string) int {
+	var stack []int
+	var arr = make([]int, len(s))
+	for i := range s {
+		if s[i] == ')' {
+			if len(stack) > 0 {
+				//判断栈顶元素
+				if t := stack[len(stack)-1]; s[t] == '(' {
+					arr[t] = 1
+					arr[i] = 1
+				}
+				//移除栈顶元素
+				stack = stack[:len(stack)-1]
+			}
+		} else {
+			stack = append(stack, i)
+		}
+	}
+	var max, cnt = 0, 0
+	for _, i := range arr {
+		if i == 1 {
+			cnt += 1
+		} else {
+			max = max_32(cnt, max)
+			cnt = 0
+		}
+	}
+	return max_32(cnt, max)
+}
+
+/**
+贪心算法
+*/
 func longestValidParentheses3(s string) int {
 	left, right, maxLength := 0, 0, 0
 	for i := 0; i < len(s); i++ {
@@ -121,49 +153,13 @@ func max_32(x, y int) int {
 	return y
 }
 
-/**
-  用栈模拟一遍，将所有能够匹配的括号的位置全部置1, 问题等价于求元素连续为1的最大长度
-*/
-func longestValidParentheses2(s string) int {
-	var stack = list.New()
-	var arr = make([]int, len(s))
-	for i, e := range s {
-		var ch = string(e)
-		if ch == ")" {
-			if stack.Len() > 0 {
-				var t = stack.Remove(stack.Back()).(int)
-				if string(s[t]) == "(" {
-					arr[t] = 1
-					arr[i] = 1
-				}
-			}
-		} else {
-			stack.PushBack(i)
-		}
-	}
-	var max, cnt = 0, 0
-	for _, i := range arr {
-		if i == 1 {
-			cnt += 1
-		} else {
-			if cnt > max {
-				max = cnt
-			}
-			cnt = 0
-		}
-	}
-	if cnt > max {
-		max = cnt
-	}
-	return max
-}
-
 //leetcode submit region end(Prohibit modification and deletion)
 
 //test from here
 func main() {
 
-	fmt.Println(longestValidParentheses("(()"))
+	fmt.Println(longestValidParentheses2("(()"))
+	fmt.Println(longestValidParentheses(")()())"))
 	//fmt.Println(longestValidParenthesesByDp("(()"))
 	//fmt.Println(longestValidParentheses("(()(()"))
 	//fmt.Println(longestValidParentheses(")()())"))
