@@ -69,7 +69,7 @@ func solveSudoku(board [][]byte) {
 			}
 		}
 	}
-	dfs(board, 0, rows, cols, zones)
+	solveSudoku_(board, 0, rows, cols, zones)
 }
 
 //将二维数组按行打平为一维数组, 按一维索引位置递归填充数字, 这里之所以打平为一维数组,避免递归时重复检查之前的元素
@@ -77,7 +77,7 @@ func solveSudoku(board [][]byte) {
 //rows: 遍历第n个位置时,各行已使用的数字集合
 //cols: 遍历第n个位置时,各列已使用的数字集合
 //zones: 遍历第n个位置时,各列已使用的数字集合
-func dfs(board [][]byte, n int, rows []int, cols []int, zones []int) bool {
+func solveSudoku_(board [][]byte, n int, rows []int, cols []int, zones []int) bool {
 	//第n个位置填充完成,递归结束
 	if n == len(board)*len(board) {
 		return true
@@ -86,7 +86,7 @@ func dfs(board [][]byte, n int, rows []int, cols []int, zones []int) bool {
 	var i, j = n / len(board), n % len(board)
 	//当前位置已填数字,直接判断下一个位置
 	if board[i][j] != '.' {
-		return dfs(board, n+1, rows, cols, zones)
+		return solveSudoku_(board, n+1, rows, cols, zones)
 	}
 	//当前位置未填充数字,则尝试填充数字1~9
 	for k := 1; k <= 9; k++ {
@@ -98,7 +98,7 @@ func dfs(board [][]byte, n int, rows []int, cols []int, zones []int) bool {
 			cols[j] |= bit
 			zones[i/3*3+j/3] |= bit
 			//继续填充下一个位置
-			if dfs(board, n+1, rows, cols, zones) {
+			if solveSudoku_(board, n+1, rows, cols, zones) {
 				//这里递归返回true,表示后续位置都已经正确填充,此时可以填充当前位置
 				board[i][j] = uint8(k + '0')
 				return true
