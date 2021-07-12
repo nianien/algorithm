@@ -61,9 +61,7 @@ func combinationSum2(candidates []int, target int) [][]int {
 //同时为了避免重复计算, 分解因子时,只能分解为大于等于当前因子的因子
 func combinationSum2_(candidates []int, target int, temp []int, ans *[][]int) {
 	if target == 0 {
-		var dst = make([]int, len(temp))
-		copy(dst, temp)
-		*ans = append(*ans, dst)
+		*ans = append(*ans, append([]int{}, temp...))
 	}
 	if target <= 0 {
 		return

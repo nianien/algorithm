@@ -48,7 +48,7 @@ import (
 
 //leetcode submit region begin(Prohibit modification and deletion)
 
-var keys = [8]string{
+var keys = []string{
 	"abc",
 	"def",
 	"ghi",
@@ -59,20 +59,19 @@ var keys = [8]string{
 	"wxyz",
 }
 
-var ans []string
-
-func backtrack(idx int, digits string, res []string) {
-	if idx == len(digits) {
-		ans = append(ans, strings.Join(res, ""))
-		return
-	}
-	for _, s := range keys[digits[idx]-'0'-2] {
-		res[idx] = string(s)
-		backtrack(idx+1, digits, res)
-	}
-
-}
 func letterCombinations(digits string) []string {
+	var ans []string
+	var backtrack func(idx int, digits string, res []string)
+	backtrack = func(idx int, digits string, res []string) {
+		if idx == len(digits) {
+			ans = append(ans, strings.Join(res, ""))
+			return
+		}
+		for _, s := range keys[digits[idx]-'0'-2] {
+			res[idx] = string(s)
+			backtrack(idx+1, digits, res)
+		}
+	}
 	backtrack(0, digits, make([]string, len(digits)))
 	return ans
 }
