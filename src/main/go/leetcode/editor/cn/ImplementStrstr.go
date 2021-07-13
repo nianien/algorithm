@@ -57,7 +57,7 @@ func strStr(haystack string, needle string) int {
 }
 
 func calShift(str string) map[string]int {
-	var shifts = make(map[string]int)
+	var shifts = map[string]int{}
 	for i, s := range str {
 		shifts[string(s)] = len(str) - i
 	}
@@ -161,6 +161,5 @@ func kmp(haystack string, needle string) int {
 //test from here
 func main() {
 	fmt.Println(strStr("hello", "ell"))
-	fmt.Println(kmp("hello", "ell"))
 	fmt.Println(kmp("hello", "ell"))
 }
