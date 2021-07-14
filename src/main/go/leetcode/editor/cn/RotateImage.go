@@ -55,11 +55,6 @@ import (
 
 //leetcode submit region begin(Prohibit modification and deletion)
 
-type Point struct {
-	X int
-	Y int
-}
-
 func rotate(matrix [][]int) {
 	var n = len(matrix)
 	var p1, p2 = 0, n - 1
@@ -76,6 +71,10 @@ func rotateBySwap(matrix [][]int, a int, b int) {
 	//我们将矩形的四条边定义为：上下左右,则初始置换位置为矩形顶点坐标:(x1,y1),(x2,y1),(x2,y2),(x2,y1)
 	//每次置换完成后，上条边：y坐标右移一位，右条边：x坐标下移一位, 下条边：y坐标左移一位，左条边：x坐标上移一位
 	//然后继续顺时针置换，直到所有位置完成置换
+	type Point struct {
+		X int
+		Y int
+	}
 	var p1, p2, p3, p4 = &Point{
 		X: a, Y: a,
 	}, &Point{
