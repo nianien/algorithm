@@ -241,15 +241,16 @@ func solveSudoku_(board [][]byte, n int, rows []int, cols []int, zones []int) bo
 //leetcode submit region end(Prohibit modification and deletion)
 
 //test from here
-func print(board [][]byte) {
-	for _, a := range board {
-		for _, b := range a {
-			fmt.Print(string(b), "   ")
-		}
-		fmt.Println()
-	}
-}
+
 func main() {
+	var print = func(board [][]byte) {
+		for _, a := range board {
+			for _, b := range a {
+				fmt.Print(string(b), "   ")
+			}
+			fmt.Println()
+		}
+	}
 	var sd = [][]byte{
 		{'5', '3', '.', '.', '7', '.', '.', '.', '.'},
 		{'6', '.', '.', '1', '9', '5', '.', '.', '.'},
@@ -262,7 +263,5 @@ func main() {
 		{'.', '.', '.', '.', '8', '.', '.', '7', '9'}}
 	solveSudoku(sd)
 	print(sd)
-
-	//fmt.Println(fill([][]byte{{1, 2}, {1, 2}, {1}}, 0, map[byte]int{}))
 
 }
