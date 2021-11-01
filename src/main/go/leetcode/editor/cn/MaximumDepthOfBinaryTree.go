@@ -23,7 +23,7 @@ package main
 import (
 	"fmt"
 )
-import . "main/go/leetcode/editor/cn/defined"
+import . "leetcode/editor/cn/defined"
 
 //leetcode submit region begin(Prohibit modification and deletion)
 /**

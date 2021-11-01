@@ -1,7 +1,11 @@
 # go config #
 
-`PROJECT_GOPATH=$PROJECT_DIR$/src/`
++ ## unset GOPATH
+  + (Preferences | Languages & Frameworks | Go | GOPATH)
 
++ ## enable GOModules 
+  + (Preferences | Languages & Frameworks | Go | GOPATH)
+  
 # leetcode config #
 
 + ## Settings for java ##
