@@ -5,6 +5,7 @@
 
 + ## enable GOModules 
   + (Preferences | Languages & Frameworks | Go | GOPATH)
+  + create go.mod at `src/main/go/leetcode`, go mod init leetcode
   
 # leetcode config #
 
