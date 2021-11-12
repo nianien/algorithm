@@ -86,8 +86,11 @@
     //${question.frontendQuestionId}.${question.titleSlug}
     ${question.content}
     package main
-    import "fmt"
-    
+    import (
+      "fmt"
+    )
+    import . "leetcode/editor/cn/defined" 
+       
     ${question.code}
     //test from here
     func main() {
