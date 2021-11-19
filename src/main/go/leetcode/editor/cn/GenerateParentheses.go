@@ -73,6 +73,8 @@ func generateParenthesis_(n int, m int) []string {
 1）针对某一种括号，当存在左括号时，可以追加右括号(nr++或者mr++）
 2）当某一种括号右括号全部使用完时，该括号排列组合完成，当所有右括号使用完成时，生成一种组合输出
 3）记录当前追加但未匹配的左括号，只能追加与最后未匹配左括号相对应的右括号。追加完右括号，则移除已匹配的左括号
+s: 当前记录的字符串
+p: 当前记录的左括号,用于判定下一个匹配的右括号
 */
 func doGenerateParenthesis(s string, p string, n int, m int, nl int, nr int, ml int, mr int, ans *[]string) {
 	//完成组合
@@ -81,15 +83,19 @@ func doGenerateParenthesis(s string, p string, n int, m int, nl int, nr int, ml 
 		return
 	}
 	if ml < m {
+		//左括号没有用完, 可以继续添加左括号
 		doGenerateParenthesis(s+"{", p+"{", n, m, nl, nr, ml+1, mr, ans)
 	}
 	if mr < ml && strings.HasSuffix(p, "{") {
+		//右括号数量不能大于左括号,右括号只能匹配最新的左括号
 		doGenerateParenthesis(s+"}", p[0:len(p)-1], n, m, nl, nr, ml, mr+1, ans)
 	}
 	if nl < n {
+		//左括号没有用完, 可以继续添加左括号
 		doGenerateParenthesis(s+"(", p+"(", n, m, nl+1, nr, ml, mr, ans)
 	}
 	if nr < nl && strings.HasSuffix(p, "(") {
+		//右括号数量不能大于左括号,右括号只能匹配最新的左括号
 		doGenerateParenthesis(s+")", p[0:len(p)-1], n, m, nl, nr+1, ml, mr, ans)
 	}
 }
