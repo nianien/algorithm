@@ -57,12 +57,14 @@ import "fmt"
 //leetcode submit region begin(Prohibit modification and deletion)
 
 func solveSudoku(board [][]byte) {
-	//统计每行/列/块已经使用的数字,按位存储
+	//统计每行/列/块已经使用的数字,使用长度为10的二进制存储
 	var rows, cols, zones = make([]int, 9), make([]int, 9), make([]int, 9)
 	for i := range board {
 		for j := range board[i] {
 			if board[i][j] != '.' {
+				//第board[i][j]位置位1
 				var bit = 1 << (board[i][j] - '0')
+				//board[i][j]位置的被占用,即行和列第board[i][j]位为1
 				rows[i] |= bit
 				cols[j] |= bit
 				zones[i/3*3+j/3] |= bit
