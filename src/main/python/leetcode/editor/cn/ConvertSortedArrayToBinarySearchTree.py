@@ -38,14 +38,13 @@
 from leetcode.editor.cn.defined import *
 
 
-# leetcode submit region begin(Prohibit modification and deletion)
 # Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-
+class TreeNode(object):
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+# leetcode submit region begin(Prohibit modification and deletion)
 
 class Solution(object):
     def sortedArrayToBST(self, nums):
@@ -75,4 +74,4 @@ class Solution(object):
 
 # test from here
 if __name__ == '__main__':
-    print(Solution().sortedArrayToBST([-10, -3, 0, 5, 9]))
+    Solution().sortedArrayToBST([-10, -3, 0, 5, 9])

@@ -48,6 +48,7 @@ import java.util.List;
 public class ThreeSum {
     public static void main(String[] args) {
         Solution solution = new ThreeSum().new Solution();
+        System.out.println(solution.threeSum(new int[]{-1,0,1,2,-1,-4}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
