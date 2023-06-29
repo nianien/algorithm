@@ -54,32 +54,38 @@ import java.util.concurrent.Semaphore;
 public class BuildingH2o {
     public static void main(String[] args) throws InterruptedException {
         H2O h2O = new H2O();
-        new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
+            new Thread(() -> {
                 try {
                     h2O.hydrogen(() -> System.out.print("H"));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
-        }).start();
-        new Thread(() -> {
-            for (int i = 0; i < 5; i++) {
+            }).start();
+        }
+
+        for (int i = 0; i < 5; i++) {
+            new Thread(() -> {
                 try {
                     h2O.oxygen(() -> System.out.print("O"));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
-        }).start();
+            }).start();
+        }
+
     }
 }
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class H2O {
 
-    private Semaphore h = new Semaphore(0);
-    private Semaphore o = new Semaphore(2);
+    //实际上只需两个信号量的和为2。
+    // 如果Semaphore_h=2，那么就是先释放两个H，然后释放一个O，输出结果：HHO；
+    // 如果是Semaphore_o=2，那么就是先释放一个O，然后释放两个H，输出结果：OHH；
+    // 如果Semaphore_h=1，Semaphore_o=1，那就是先释放一个H，再释放一个O，再释放一个H，输出结果：HOH；
+    private Semaphore h = new Semaphore(1);
+    private Semaphore o = new Semaphore(1);
 
     public H2O() {
 
@@ -89,7 +95,7 @@ class H2O {
         h.acquire();
         // releaseHydrogen.run() outputs "H". Do not change or remove this line.
         releaseHydrogen.run();
-        o.release(1);
+        o.release();
     }
 
     public void oxygen(Runnable releaseOxygen) throws InterruptedException {
