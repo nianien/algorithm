@@ -1,0 +1,40 @@
+### 解题思路
+
+- 题目说的很绕，但实际就是想实现每一个执行周期里，o输出一次，h输出两次
+- 直接用信号量解决，很爽。
+
+### 代码
+
+* java
+
+```java
+class H2O {
+    
+    private Semaphore h = new Semaphore(2);
+    private Semaphore o = new Semaphore(1);
+
+    public H2O() {
+
+    }
+
+    public void hydrogen(Runnable releaseHydrogen) throws InterruptedException {
+        h.acquire();
+        // releaseHydrogen.run() outputs "H". Do not change or remove this line.
+        releaseHydrogen.run();
+        // h都有了，释放一个o
+        if (h.availablePermits() == 0) {
+            o.release();
+        }
+    }
+
+    public void oxygen(Runnable releaseOxygen) throws InterruptedException {
+        o.acquire();
+        // releaseOxygen.run() outputs "O". Do not change or remove this line.
+        releaseOxygen.run();
+        if (o.availablePermits() == 0) {
+            h.release(2);
+        }
+    }
+}
+```
+

@@ -1,0 +1,51 @@
+本题先对upper和lower相加判断是否和colsum数组中的总和是否相等，如果不相等直接为空，否则判断colsum中为2的,上下两层一定都为1，upper和lower都-1，colsum不为2全部先填充为0，然后判断colsum中为1时，先添加到上面一层，upper-1，upper不大于0时，开始填充到下面一层，lower-1,最后判断upper和lower是否等于0，是否全部填充完或过多填充。
+
+* 
+
+```
+class Solution {
+    public List<List<Integer>> reconstructMatrix(int upper, int lower, int[] colsum) {
+       List<List<Integer>> lists = new LinkedList<>();
+	    List<Integer> lists1 = new ArrayList<>();
+	    List<Integer> lists2 = new ArrayList<>();
+	    int sum = 0;
+	    for(int i = 0; i < colsum.length; i++) {
+		    sum += colsum[i];
+	    }
+	    if (sum != upper+lower){
+		    return lists;
+	    }
+	    for(int i = 0; i < colsum.length; i++) {
+		    if (colsum[i] == 2){
+			    lists1.add(1);
+			    lists2.add(1);
+			    upper--;
+			    lower--;
+		    }else {
+			    lists1.add(0);
+			    lists2.add(0);
+		    }
+	    }
+	    for(int i = 0; i < colsum.length; i++) {
+		    if (colsum[i] == 1){
+			    if (upper > 0){
+				    lists1.set(i,1);
+				    lists2.set(i,0);
+				    upper--;
+			    }else {
+				    lists1.set(i,0);
+				    lists2.set(i,1);
+				    lower--;
+			    }
+		    }
+	    }
+	    if (upper != 0 || lower!=0){
+	    	return lists;
+	    }
+	    lists.add(lists1);
+	    lists.add(lists2);
+	    return lists;
+    }
+}
+```
+

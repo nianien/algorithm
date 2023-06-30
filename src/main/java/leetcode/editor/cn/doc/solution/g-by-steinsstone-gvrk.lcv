@@ -1,0 +1,39 @@
+1.upper+lower!=sum(colsum)的话那肯定构造不了；
+2.先把colsum[i]==2的地方先构造出来，剩下的根据upper和lower数量构造就好了，顺序无所谓的；
+3.如果upper或者lower中的一个小于sum(colsum[i]==2)，那某一行1的数量不够，构造不出来。
+
+* 
+
+```
+class Solution {
+public:
+    vector<vector<int>> reconstructMatrix(int upper, int lower, vector<int>& colsum) {
+        int n = colsum.size();
+        if(upper+lower!=accumulate(colsum.begin(),colsum.end(),0))
+            return {};
+        vector<vector<int>>ans(2,vector<int>(n));
+        for(int i=0;i<n;i++){
+            if(colsum[i]==2){
+                ans[0][i] = 1;
+                ans[1][i] = 1;
+                upper--;lower--;
+            }
+        }
+        if(upper<0||lower<0)
+            return {};
+        for(int i=0;i<n;i++){
+            if(colsum[i]==1){
+                if(upper>0){
+                    ans[0][i] = 1;
+                    upper--;
+                }else{
+                    ans[1][i] = 1;
+                    lower--;
+                }
+            }
+        }
+        return ans;
+    }
+};
+```
+
