@@ -4,3 +4,4 @@ target
 .idea
 /venv/
 **/__pycache__/
+**/leetcode/editor/cn/doc/
