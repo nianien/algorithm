@@ -72,7 +72,7 @@ func std2(str string) string {
 	for _, b := range str {
 		cnt[b-'a']++
 	}
-	var build strings.Builder
+	build := strings.Builder{}
 	for i, i2 := range cnt {
 		if i2 > 0 {
 			build.WriteString(string(i + 'a'))
@@ -90,5 +90,6 @@ func std2(str string) string {
 func main() {
 
 	//fmt.Println(groupAnagrams([]string{"eat", "tea", "tan", "ate", "nat", "bat"}))
-	fmt.Print(std2("eatttttttt"))
+	fmt.Println(std("eatttttttt"))
+	fmt.Println(std2("eatttttttt"))
 }
