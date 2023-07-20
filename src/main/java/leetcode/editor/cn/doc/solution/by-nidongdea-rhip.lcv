@@ -1,0 +1,46 @@
+* 
+
+```
+var hydrogen_chan1 = make(chan int)
+var hydrogen_chan2 = make(chan int)
+var oxygen_chan = make(chan int)
+
+func hydrogen1(n int) {
+	for i := 0; i < n; i++ {
+		<-hydrogen_chan1
+		fmt.Printf("H")
+		hydrogen_chan2 <- 1
+	}
+	close(hydrogen_chan2)
+}
+func hydrogen2(n int) {
+	for i := 0; i < n; i++ {
+		<-hydrogen_chan2
+		fmt.Printf("H")
+		oxygen_chan <- 1
+	}
+	close(oxygen_chan)
+}
+func oxygen(n int) {
+	for i := 0; i < n; i++ {
+		<-oxygen_chan
+		fmt.Println("O")
+		if i == n-1 {
+			close(hydrogen_chan1)
+			break
+		}
+		hydrogen_chan1 <- 1
+	}
+}
+func Test_hydrogen_oxygen(t *testing.T) {
+	water := "HOHHHOOHHOOHHHH"
+	n := len(water)
+	go hydrogen1(n / 3)
+	go hydrogen2(n / 3)
+	go oxygen(n / 3)
+	hydrogen_chan1 <- 1
+	time.Sleep(time.Second)
+}
+```
+
+感觉还有点问题，不过应该能过
