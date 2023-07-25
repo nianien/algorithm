@@ -50,24 +50,9 @@ func solveNQueens(n int) [][]string {
 	//每行最多只有一个皇后，按行从上往下，决定每行可摆放的皇后位置，到第n-1行完成一次尝试
 	//因此，我们决定初始化第0行摆放的位置，从[0,0]...[0,n-1]，只需遍历n次
 	for i := 0; i < n; i++ {
-		arr := mk(n)
+		arr := create(n)
 		//传递指针数组
 		solveNQueens_0(0, i, 0, n, arr, &res)
-	}
-	return res
-}
-
-func mk(n int) [][]byte {
-	arr := make([][]byte, n)
-	for k := range arr {
-		arr[k] = make([]byte, n)
-	}
-	return arr
-}
-func flat(arr [][]byte) []string {
-	res := make([]string, 0)
-	for _, s := range arr {
-		res = append(res, string(s))
 	}
 	return res
 }
@@ -83,23 +68,23 @@ func solveNQueens_0(x int, y int, k int, n int, board [][]byte, res *[][]string)
 	for i := 0; i < n; i++ {
 		if i != y {
 			//NOTE: 指针传递
-			success = success && fill(board, n, x, i, &fallback)
+			success = success && mark(board, n, x, i, &fallback)
 		}
 		if i != x {
-			success = success && fill(board, n, i, y, &fallback)
+			success = success && mark(board, n, i, y, &fallback)
 		}
 		if i > 0 {
 			if x+i < n && y+i < n {
-				success = success && fill(board, n, x+i, y+i, &fallback)
+				success = success && mark(board, n, x+i, y+i, &fallback)
 			}
 			if x-i >= 0 && y-i >= 0 {
-				success = success && fill(board, n, x-i, y-i, &fallback)
+				success = success && mark(board, n, x-i, y-i, &fallback)
 			}
 			if x-i >= 0 && y+i < n {
-				success = success && fill(board, n, x-i, y+i, &fallback)
+				success = success && mark(board, n, x-i, y+i, &fallback)
 			}
 			if x+i < n && y-i >= 0 {
-				success = success && fill(board, n, x+i, y-i, &fallback)
+				success = success && mark(board, n, x+i, y-i, &fallback)
 			}
 		}
 		if !success {
@@ -111,6 +96,7 @@ func solveNQueens_0(x int, y int, k int, n int, board [][]byte, res *[][]string)
 		board[x][y] = 'Q'
 		if k == n-1 {
 			*res = append(*res, flat(board))
+			//back-track
 			board[x][y] = 0
 			return
 		}
@@ -119,15 +105,35 @@ func solveNQueens_0(x int, y int, k int, n int, board [][]byte, res *[][]string)
 		for i := 0; i < n; i++ {
 			solveNQueens_0(x+1, i, k+1, n, board, res)
 		}
+		//back-track
+		board[x][y] = 0
 	}
-	//rollback
+	//back-track
 	for _, p := range fallback {
 		board[p/n][p%n] = 0
 	}
-	board[x][y] = 0
 }
 
-func fill(res [][]byte, n int, i int, j int, l *[]int) bool {
+// 创建指定二维数组
+func create(n int) [][]byte {
+	arr := make([][]byte, n)
+	for k := range arr {
+		arr[k] = make([]byte, n)
+	}
+	return arr
+}
+
+// 打平二维数组
+func flat(arr [][]byte) []string {
+	res := make([]string, 0)
+	for _, s := range arr {
+		res = append(res, string(s))
+	}
+	return res
+}
+
+// 标识该位置不能放置皇后，如果标记成功返回true，否则返回false
+func mark(res [][]byte, n int, i int, j int, l *[]int) bool {
 	if res[i][j] == 'Q' {
 		return false
 	}
