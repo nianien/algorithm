@@ -4,7 +4,9 @@ import com.lining.uglynumber.UglyNumber;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertTrue;
 
@@ -22,7 +24,7 @@ public class TestUglyNumber {
 
     @Before
     public void before() {
-        testNum = 1900;
+        testNum = 10;
     }
 
     @Test
@@ -37,6 +39,7 @@ public class TestUglyNumber {
         t2 = System.nanoTime();
         System.out.println("time:" + (t2 - t1));
         assertTrue(Objects.deepEquals(un, un2));
+        System.out.println(Arrays.stream(un).mapToObj(i->i).collect(Collectors.toList()));
     }
 
 }

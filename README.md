@@ -79,7 +79,7 @@
     `$PROJECT_DIR$/src/main/go`
 
   + ###CodeFileName ###
-    `$!velocityTool.camelCaseName(${question.titleSlug})`
+    `${question.frontendQuestionId}/$!velocityTool.camelCaseName(${question.titleSlug})`
 
   + ###CodeTemplate ###
     ```
