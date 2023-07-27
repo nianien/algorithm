@@ -74,19 +74,19 @@ func balanceHeight(root *TreeNode) int {
 	if rightHeight == -1 {
 		return -1
 	}
-	if abs_110(leftHeight-rightHeight) > 1 {
+	if abs(leftHeight-rightHeight) > 1 {
 		return -1
 	}
-	return max_110(leftHeight, rightHeight) + 1
+	return max(leftHeight, rightHeight) + 1
 }
-func max_110(x, y int) int {
+func max(x, y int) int {
 	if x > y {
 		return x
 	}
 	return y
 }
 
-func abs_110(x int) int {
+func abs(x int) int {
 	if x < 0 {
 		return -1 * x
 	}

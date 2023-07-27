@@ -162,12 +162,14 @@ func max_32(x, y int) int {
 // test from here
 func main() {
 
+	fmt.Println(longestValidParentheses1("(()"))
 	fmt.Println(longestValidParentheses2("(()"))
+	fmt.Println(longestValidParentheses3("(()"))
 	fmt.Println(longestValidParentheses(")()())"))
-	//fmt.Println(longestValidParenthesesByDp("(()"))
-	//fmt.Println(longestValidParentheses("(()(()"))
-	//fmt.Println(longestValidParentheses(")()())"))
-	//
-	//fmt.Println(longestValidParentheses(")()())()()("))
-	//fmt.Println(longestValidParentheses("(()(((()"))
+	fmt.Println(longestValidParentheses3("(()"))
+	fmt.Println(longestValidParentheses("(()(()"))
+	fmt.Println(longestValidParentheses(")()())"))
+
+	fmt.Println(longestValidParentheses(")()())()()("))
+	fmt.Println(longestValidParentheses("(()(((()"))
 }

@@ -80,5 +80,8 @@ func main() {
 	n1.Next = n2
 	n2.Next = n3
 	n3.Next = n1
+	//循环链表,打印到循环处中断
+	fmt.Println(reverseList(n1))
+	n1 = BuildList(1, 2, 3)
 	fmt.Println(reverseList(n1))
 }

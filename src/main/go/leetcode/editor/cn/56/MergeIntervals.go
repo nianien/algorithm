@@ -54,7 +54,7 @@ func merge(intervals [][]int) [][]int {
 			var last = ans[len(ans)-1]
 			//重叠
 			if last[1] >= c[0] {
-				last[1] = max_56(last[1], c[1])
+				last[1] = max(last[1], c[1])
 			} else {
 				ans = append(ans, c)
 			}
@@ -63,7 +63,7 @@ func merge(intervals [][]int) [][]int {
 	return ans
 }
 
-func max_56(x int, y int) int {
+func max(x int, y int) int {
 	if x > y {
 		return x
 	}

@@ -127,8 +127,8 @@ func putIfAbsent(arr *[9]bool, k int) bool {
 /**
 判断x,y坐标以及所在区域块是否重复
 */
-func (this *Position) Check(x int, y int) bool {
-	return putIfAbsent(&this.Xs, x) && putIfAbsent(&this.Ys, y) && putIfAbsent(&this.Rs, x/3*3+y/3)
+func (p *Position) Check(x int, y int) bool {
+	return putIfAbsent(&p.Xs, x) && putIfAbsent(&p.Ys, y) && putIfAbsent(&p.Rs, x/3*3+y/3)
 }
 
 //leetcode submit region end(Prohibit modification and deletion)

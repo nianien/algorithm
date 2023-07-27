@@ -14,8 +14,8 @@ func NewListNode(val int, next *ListNode) *ListNode {
 	}
 }
 
-func (this *ListNode) String() string {
-	p := this
+func (ln *ListNode) String() string {
+	p := ln
 	s := "|"
 	id := 1
 	var nodes = make(map[*ListNode]int)
