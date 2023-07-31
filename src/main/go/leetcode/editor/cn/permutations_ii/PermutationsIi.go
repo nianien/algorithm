@@ -42,47 +42,47 @@ import (
 func permuteUnique(nums []int) [][]int {
 	sort.Ints(nums)
 	var check = make([]int, len(nums))
+	for i := range check {
+		check[i] = -1
+	}
 	var ans [][]int
 	permuteUnique_(nums, 0, check, &ans)
 	return ans
 }
 
-func permuteUnique_(nums []int, index int, check []int, ans *[][]int) {
-	// 根据校验数组和原始数组计算排列数组
-	var calculate = func(check []int, origin []int) []int {
-		//还原排列数组
-		var perm = make([]int, len(origin))
-		for i, e := range check {
-			//v表示在arr[i]在新数组的索引+1
-			//因此新数组索引位置v-1对应的元素就是arr[i]
-			perm[e-1] = origin[i]
-		}
-		return perm
-	}
-	if len(nums) == index {
+func permuteUnique_(nums []int, k int, check []int, ans *[][]int) {
+	if len(nums) == k {
 		//根据校验数组返回当前排列数组
 		*ans = append(*ans, calculate(check, nums))
 	}
-	for i := range nums {
-		//为了解决重复元素的问题, 只需要保证在填第idx个元素的时候, 重复数字只会被填入一次即可
+	for i := 0; i < len(nums); i++ {
+		//为了解决重复元素的问题, 只需要保证在填第k个元素的时候, 重复数字只会被填入一次即可
 		//也就是每次填入的数一定是这个数所在集合中「从左往右第一个未被填过的数字」
 		//也就是说, 相同的数字，只有左边的使用了，右边的才能使用，如果前一个相同元素未使用, 那么当前元素就不能使用
 		//这里举例说明，比如存在三个1，第二个1只有在使用2次的时候才能使用，第三个1只有在使用3次的时候才能使用
-		if check[i] > 0 || i > 0 && check[i-1] == 0 && nums[i] == nums[i-1] {
+		if check[i] != -1 || i > 0 && check[i-1] == -1 && nums[i] == nums[i-1] {
 			continue
 		}
 		//注意: 这里原数组元素在排列数组中的索引位置为从1开始,因此使用index+1
-		check[i] = index + 1
-		permuteUnique_(nums, index+1, check, ans)
+		check[i] = k
+		permuteUnique_(nums, k+1, check, ans)
 		//回溯,重置i元素的索引位置
-		check[i] = 0
+		check[i] = -1
 	}
+}
+
+func calculate(check []int, origin []int) []int {
+	perm := make([]int, len(origin))
+	for i, v := range check {
+		perm[v] = origin[i]
+	}
+	return perm
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
 
 // test from here
 func main() {
-	fmt.Println(permuteUnique([]int{1, 2, 3}))
+	//fmt.Println(permuteUnique([]int{1, 2, 3}))
 	fmt.Println(permuteUnique([]int{1, 1, 2}))
 }

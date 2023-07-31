@@ -19,7 +19,7 @@ public class TestMultiPermutation {
 
     @Test
     public void test() {
-        multiPermutation.permute("1234");
+        multiPermutation.permute("1112");
 //        assertEquals(multiPermutation.permute("123"), factorial("123".length()));
 //        assertEquals(multiPermutation.permute("abbcddef"), factorial("abbcddef".length()) / (factorial("bb".length()) * factorial("dd".length())));
     }

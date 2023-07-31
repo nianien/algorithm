@@ -1,7 +1,5 @@
 package com.lining.permutation;
 
-import java.util.Arrays;
-
 /**
  * <pre>
  * 功能：
@@ -72,58 +70,23 @@ public class MultiPermutation {
             // 如果不是第一次出现，则相同的字符已经调换过
             if (this.isFirstChar(arr, k, i)) {
                 //将i位置的元素移动到k之前
-                this.moveHead(arr, k, i);
+                this.swap(arr, k, i);
                 count += this.permute(arr, k + 1);
                 //将k位置的元素移动到i之后
-                this.moveTail(arr, k, i);
+                this.swap(arr, k, i);
             }
         }
         return count;
     }
 
-    /**
-     * 将索引较大的元素插入到索引较小的元素前面<br/>
-     *
-     * @param arr
-     * @param index1
-     * @param index2
-     */
-    private void moveHead(char[] arr, int index1, int index2) {
-        if (index1 == index2) {
-            return;
-        }
-        if (index1 > index2) {
-            moveHead(arr, index2, index1);
-            return;
-        }
-        char temp = arr[index2];
-        for (int i = index2; i > index1; i--) {
-            arr[i] = arr[i - 1];
-        }
-        arr[index1] = temp;
+
+    private void swap(char[] arr, int i, int j) {
+        //还原排列数组
+        char temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 
-    /**
-     * 将索引较小的元素插入到索引较大的元素后面
-     *
-     * @param arr
-     * @param index1
-     * @param index2
-     */
-    private void moveTail(char[] arr, int index1, int index2) {
-        if (index1 == index2) {
-            return;
-        }
-        if (index1 > index2) {
-            moveTail(arr, index2, index1);
-            return;
-        }
-        char temp = arr[index1];
-        for (int i = index1; i < index2; i++) {
-            arr[i] = arr[i + 1];
-        }
-        arr[index2] = temp;
-    }
 
     /**
      * 查找从位置begin开始，end位置上的元素是不是第一次出现
@@ -144,12 +107,4 @@ public class MultiPermutation {
     }
 
 
-    public static void main(String[] args) {
-        MultiPermutation p = new MultiPermutation();
-        char[] arr = new char[]{'1', '2', '3', '4'};
-        p.moveHead(arr, 1, 3);
-        System.out.println(new String(arr));
-        p.moveTail(arr, 3, 1);
-        System.out.println(new String(arr));
-    }
 }
