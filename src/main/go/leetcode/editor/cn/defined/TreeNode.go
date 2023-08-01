@@ -1,6 +1,9 @@
 package defined
 
-import "fmt"
+import (
+	"container/list"
+	"fmt"
+)
 
 type TreeNode struct {
 	Val   int
@@ -17,5 +20,38 @@ func NewTreeNode(val int, left *TreeNode, right *TreeNode) *TreeNode {
 }
 
 func (tn TreeNode) String() string {
-	return fmt.Sprintf("[val:%d]", tn.Val)
+	if tn.Left == nil && tn.Right == nil {
+		return fmt.Sprintf("%d", tn.Val)
+	}
+	return fmt.Sprintf("[%d,%s,%s]", tn.Val, tn.Left, tn.Right)
+}
+
+func BuildTree(vals ...int) *TreeNode {
+	t := &TreeNode{Val: vals[0]}
+	var ls = list.List{}
+	ls.PushBack(t)
+	n := len(vals)
+	i := 1
+	for i < n {
+		h := ls.Front()
+		r := h.Value.(*TreeNode)
+		ls.Remove(h)
+		if vals[i] == -1 {
+			r.Left = nil
+		} else {
+			r.Left = &TreeNode{Val: vals[i]}
+			ls.PushBack(r.Left)
+		}
+		i++
+		if i < n {
+			if vals[i] == -1 {
+				r.Right = nil
+			} else {
+				r.Right = &TreeNode{Val: vals[i]}
+				ls.PushBack(r.Right)
+			}
+			i++
+		}
+	}
+	return t
 }
