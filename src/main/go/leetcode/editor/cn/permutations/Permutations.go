@@ -64,12 +64,10 @@ func permute_(nums []int, l int, k int, ans *[][]int) {
 	}
 }
 
-// 根据校验数组和原始数组计算排列数组
+// 交互数组元素
 func swap(nums []int, i, j int) {
 	//还原排列数组
-	temp := nums[i]
-	nums[i] = nums[j]
-	nums[j] = temp
+	nums[i], nums[j] = nums[j], nums[i]
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
