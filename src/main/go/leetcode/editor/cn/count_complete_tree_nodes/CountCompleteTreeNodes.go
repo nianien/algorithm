@@ -59,7 +59,35 @@ import . "leetcode/editor/cn/defined"
  *     Right *TreeNode
  * }
  */
+
 func countNodes(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	if root.Left == nil && root.Right == nil {
+		return 1
+	}
+
+	lh := countLevel(root.Left)
+	rh := countLevel(root.Right)
+	if lh == rh {
+		//左子树为满二叉树，左子树+根节点的总数为1<<lh
+		return countNodes(root.Right) + (1 << lh)
+	} else {
+		//右子树为满二叉树，右子树+根节点的总数为1<<rh
+		return countNodes(root.Left) + (1 << rh)
+	}
+}
+
+func countLevel(root *TreeNode) int {
+	level := 0
+	for ; root != nil; root = root.Left {
+		level++
+	}
+	return level
+}
+
+func countNodes2(root *TreeNode) int {
 	if root == nil {
 		return 0
 	}
