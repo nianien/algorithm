@@ -1,20 +1,30 @@
-//22.generate-parentheses
-//数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
+//222.count-complete-tree-nodes
+//给你一棵 完全二叉树 的根节点 root ，求出该树的节点个数。
+//
+// 完全二叉树 的定义如下：在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。若最底层
+//为第 h 层，则该层包含 1~ 2h 个节点。
 //
 //
 //
 // 示例 1：
 //
 //
-//输入：n = 3
-//输出：["((()))","(()())","(())()","()(())","()()()"]
+//输入：root = [1,2,3,4,5,6]
+//输出：6
 //
 //
 // 示例 2：
 //
 //
-//输入：n = 1
-//输出：["()"]
+//输入：root = []
+//输出：0
+//
+//
+// 示例 3：
+//
+//
+//输入：root = [1]
+//输出：1
 //
 //
 //
@@ -22,89 +32,94 @@
 // 提示：
 //
 //
-// 1 <= n <= 8
+// 树中节点的数目范围是[0, 5 * 104]
+// 0 <= Node.val <= 5 * 104
+// 题目数据保证输入的树是 完全二叉树
 //
-// Related Topics 字符串 动态规划 回溯
-// 👍 1859 👎 0
+//
+//
+//
+// 进阶：遍历树来统计节点是一种时间复杂度为 O(n) 的简单解决方案。你可以设计一个更快的算法吗？
+// Related Topics 树 二分查找
+// 👍 500 👎 0
 
 package main
 
 import (
 	"fmt"
-	"strings"
 )
+import . "leetcode/editor/cn/defined"
 
-// leetcode submit region begin(Prohibit modification and deletion)
-func generateParenthesis(n int) []string {
-	return generateParenthesis_(n, 0)
+//leetcode submit region begin(Prohibit modification and deletion)
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func countNodes(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	//计算树的高度,根节点为0层
+	var level = 0
+	var node = root
+	for node.Left != nil {
+		level++
+		node = node.Left
+	}
+	//根节点记为1，从根节点到任意节点的路径，左子节点记为0，右子节点记为1，生成一个二进制数，该数字为节点先根遍历的顺序
+	//由上，则第一个叶子节点的顺序为k=2^h,任意一个叶子节点的范围为[2^h,2^(h+1)-1]
+	//假设一个叶子节点对应的二进制为110001,则表示根->右->左->左->左->右的路径，通过该路径就可以找到该叶子节点，并判断是否为空
+	//如果为空，则说明该叶子节点不存在，二分查找最后一个叶子节点，其对应二进制表示就是节点总数
+
+	//2^h
+	var low = 1 << level
+	//2^(h+1)-1
+	var high = (1 << level << 1) - 1
+	for low < high {
+		//注：加1中间偏右，不加1中间偏左
+		var mid = (high + low + 1) / 2
+		if exists(root, level, mid) {
+			//这里mid一定存在，所以返回值为low的边界值
+			low = mid
+		} else {
+			high = mid - 1
+		}
+	}
+	return low
 }
 
-//编写一个函数以生成n个小括号，和m个大括号，要求输出格式正确的括号的所有组合。例如，
-//给定n = 1，m=1
-//输出为 ({}) ,(){}, {}(), {()}
-//给定n = 2，m=1
-//输出为{}()(), {()}(),{()()}, ({})(),(){}(),(){()}, ()({}), ()(){},{}(()),{(())},({}()),({()}),(({})),((){}),(()){}
-//
-//1）描述你的设计思路：
-//
-//2）代码如下：
-//
-//3）编写对应的测试用例：
-//
-//4）运行结果如下：
-//输出n = 3， m=1 的所有运行结果
-//输出n = 1， m=2 的所有运行结果
-//
-//输入格式统一为：
-//3,1
-//1,2
+/**
+判断第K个元素是否存在
+如何判断第 k 个节点是否存在呢？
+如果第 k 个节点位于第 h 层，则 k 的二进制表示包含 h+1 位，其中最高位是 1，其余各位从高到低表示从根节点到第 k 个节点的路径，
+0 表示移动到左子节点，1 表示移动到右子节点。通过位运算得到第 k 个节点对应的路径，判断该路径对应的节点是否存在，即可判断第 k 个节点是否存在。
 
-/*
-*
-题目升级，同时支持大括号和小括号的生成； 当大括号个数为0时，降级为原题目
 */
-func generateParenthesis_(n int, m int) []string {
-	var ans []string
-	doGenerateParenthesis("", "", n, m, 0, 0, 0, 0, &ans)
-	return ans
-}
-
-/*
-*
-递归方法
-1）针对某一种括号，当存在左括号时，可以追加右括号(nr++或者mr++）
-2）当某一种括号右括号全部使用完时，该括号排列组合完成，当所有右括号使用完成时，生成一种组合输出
-3）记录当前追加但未匹配的左括号，只能追加与最后未匹配左括号相对应的右括号。追加完右括号，则移除已匹配的左括号
-s: 当前记录的字符串
-p: 当前记录的左括号,用于判定下一个匹配的右括号
-*/
-func doGenerateParenthesis(s string, p string, n int, m int, nl int, nr int, ml int, mr int, ans *[]string) {
-	//完成组合
-	if mr == m && nr == n {
-		*ans = append(*ans, s)
-		return
+func exists(root *TreeNode, level int, k int) bool {
+	//从根节点到最level层的bit长度
+	var bits = 1 << (level - 1)
+	//fmt.Println(strconv.FormatInt(int64(bits), 2))
+	var node = root
+	//bits=0表示查找结束，node！=null表示节点存在
+	for node != nil && bits > 0 {
+		if (bits & k) == 0 {
+			node = node.Left
+		} else {
+			node = node.Right
+		}
+		bits >>= 1
 	}
-	if ml < m {
-		//左括号没有用完, 可以继续添加左括号
-		doGenerateParenthesis(s+"{", p+"{", n, m, nl, nr, ml+1, mr, ans)
-	}
-	if mr < ml && strings.HasSuffix(p, "{") {
-		//右括号数量不能大于左括号,右括号只能匹配最新的左括号
-		doGenerateParenthesis(s+"}", p[0:len(p)-1], n, m, nl, nr, ml, mr+1, ans)
-	}
-	if nl < n {
-		//左括号没有用完, 可以继续添加左括号
-		doGenerateParenthesis(s+"(", p+"(", n, m, nl+1, nr, ml, mr, ans)
-	}
-	if nr < nl && strings.HasSuffix(p, "(") {
-		//右括号数量不能大于左括号,右括号只能匹配最新的左括号
-		doGenerateParenthesis(s+")", p[0:len(p)-1], n, m, nl, nr+1, ml, mr, ans)
-	}
+	return node != nil
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
 
-// test from here
+//test from here
 func main() {
-	fmt.Println(generateParenthesis(2))
+	var root = BuildTree(1, 2, 3, 4, 5, 6)
+	fmt.Println(countNodes(root))
 }

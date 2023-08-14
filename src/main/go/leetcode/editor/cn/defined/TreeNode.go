@@ -26,6 +26,7 @@ func (tn TreeNode) String() string {
 	return fmt.Sprintf("[%d,%s,%s]", tn.Val, tn.Left, tn.Right)
 }
 
+// BuildTree 按照层次遍历顺序构建树, 中间节点为空null,使用-1表示
 func BuildTree(vals ...int) *TreeNode {
 	t := &TreeNode{Val: vals[0]}
 	var ls = list.List{}
