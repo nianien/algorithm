@@ -90,15 +90,24 @@ interface IH2O {
 
     void oxygen(Runnable releaseOxygen) throws InterruptedException;
 
-    default boolean genWater(AtomicInteger hNum, AtomicInteger oNum) {
-        if (hNum.get() == 2 && oNum.get() == 1) {
-            hNum.set(0);
-            oNum.set(0);
-            System.out.println();
-            return true;
-        }
-        return false;
+}
+
+class H2O {
+
+    private IH2O ih2O;
+
+    public H2O(IH2O ih2O) {
+        this.ih2O = ih2O;
     }
+
+    public void hydrogen(Runnable releaseHydrogen) throws InterruptedException {
+        ih2O.hydrogen(releaseHydrogen);
+    }
+
+    public void oxygen(Runnable releaseOxygen) throws InterruptedException {
+        ih2O.oxygen(releaseOxygen);
+    }
+
 }
 
 abstract class AH2O implements IH2O {
@@ -118,28 +127,6 @@ abstract class AH2O implements IH2O {
 }
 
 
-class H2O {
-
-    private IH2O ih2O;
-
-    public H2O(IH2O ih2O) {
-        this.ih2O = ih2O;
-    }
-
-    public H2O() {
-        this(new CH2O());
-    }
-
-    public void hydrogen(Runnable releaseHydrogen) throws InterruptedException {
-        ih2O.hydrogen(releaseHydrogen);
-    }
-
-    public void oxygen(Runnable releaseOxygen) throws InterruptedException {
-        ih2O.oxygen(releaseOxygen);
-    }
-
-
-}
 
 class LH2O extends AH2O {
 
