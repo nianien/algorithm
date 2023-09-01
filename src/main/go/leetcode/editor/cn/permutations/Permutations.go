@@ -58,18 +58,10 @@ func permute_(nums []int, l int, k int, ans *[][]int) {
 		*ans = append(*ans, append([]int{}, nums...))
 	}
 	for i := k; i < l; i++ {
-		swap(nums, k, i)
+		nums[k], nums[i] = nums[i], nums[k]
 		permute_(nums, l, k+1, ans)
-		swap(nums, k, i)
+		nums[k], nums[i] = nums[i], nums[k]
 	}
-}
-
-// 根据校验数组和原始数组计算排列数组
-func swap(nums []int, i, j int) {
-	//还原排列数组
-	temp := nums[i]
-	nums[i] = nums[j]
-	nums[j] = temp
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
