@@ -49,73 +49,65 @@
 
 package leetcode.editor.cn;
 
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.Semaphore;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class BuildingH2o {
-    public static void main(String[] args) throws InterruptedException {
-        H2O h2O = new H2O(new LH2O());
-        for (int i = 0; i < 20; i++) {
-            new Thread(() -> {
-                try {
-                    h2O.hydrogen(() -> System.out.print("H"));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }, "Thread-H-" + i).start();
-        }
 
-        for (int i = 0; i < 10; i++) {
-            new Thread(() -> {
-                try {
-                    h2O.oxygen(() -> System.out.print("O"));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }, "Thread-O-" + i).start();
-        }
+    private static H2OGenerator generator = H2OGenerator.create();
+
+    public static void main(String[] args) throws InterruptedException {
+        gen(new LockH2O(), 10);
+        System.out.println();
+        gen(new SemaphoreH2O(), 10);
+        System.out.println();
+        gen(new CyclicBarrierH2O(), 10);
+        System.out.println();
 
     }
+
+    /**
+     * 生产指定数据量的水分子
+     *
+     * @param h2O
+     * @param n
+     * @throws InterruptedException
+     */
+    public static void gen(IH2O h2O, int n) throws InterruptedException {
+        ExecutorService hes = Executors.newCachedThreadPool();
+        for (int i = 0; i < n * 2; i++) {
+            hes.submit(() -> {
+                try {
+                    h2O.hydrogen(generator::hydrogen);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
+
+        ExecutorService oes = Executors.newCachedThreadPool();
+        for (int i = 0; i < n; i++) {
+            oes.submit(() -> {
+                try {
+                    h2O.oxygen(generator::oxygen);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }, "Thread-O-" + i);
+        }
+        hes.shutdown();
+        hes.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
+        oes.shutdown();
+        oes.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
+    }
+
 }
+
 
 //leetcode submit region begin(Prohibit modification and deletion)
-
-interface IH2O {
-    void hydrogen(Runnable releaseHydrogen) throws InterruptedException;
-
-    void oxygen(Runnable releaseOxygen) throws InterruptedException;
-
-    default boolean genWater(AtomicInteger hNum, AtomicInteger oNum) {
-        if (hNum.get() == 2 && oNum.get() == 1) {
-            hNum.set(0);
-            oNum.set(0);
-            System.out.println();
-            return true;
-        }
-        return false;
-    }
-}
-
-abstract class AH2O implements IH2O {
-
-    protected final AtomicInteger hNum = new AtomicInteger();
-    protected final AtomicInteger oNum = new AtomicInteger();
-
-    protected boolean genWater() {
-        if (hNum.get() == 2 && oNum.get() == 1) {
-            hNum.set(0);
-            oNum.set(0);
-//            System.out.println();
-            return true;
-        }
-        return false;
-    }
-}
 
 
 class H2O {
@@ -127,7 +119,7 @@ class H2O {
     }
 
     public H2O() {
-        this(new CH2O());
+        this(new CyclicBarrierH2O());
     }
 
     public void hydrogen(Runnable releaseHydrogen) throws InterruptedException {
@@ -138,28 +130,116 @@ class H2O {
         ih2O.oxygen(releaseOxygen);
     }
 
+}
+
+interface IH2O {
+    void hydrogen(Runnable releaseHydrogen) throws InterruptedException;
+
+    void oxygen(Runnable releaseOxygen) throws InterruptedException;
 
 }
 
-class LH2O extends AH2O {
+/**
+ * 水分子合成器
+ */
+class H2OGenerator {
+    /**
+     * H原子计数
+     */
+    protected final AtomicInteger hNum = new AtomicInteger();
+    /**
+     * O原子计数
+     */
+    protected final AtomicInteger oNum = new AtomicInteger();
 
+
+    private static H2OGenerator h2OGenerator = new H2OGenerator();
+
+    public static H2OGenerator create() {
+        return h2OGenerator;
+    }
+
+    /**
+     * 生产氢原子
+     */
+    public void hydrogen() {
+        System.out.print("H");
+        hNum.incrementAndGet();
+        if (hNum.get() > 2) {
+            throw new IllegalStateException("生产故障");
+        }
+        tryWater();
+    }
+
+    /**
+     * 生产氧原子
+     */
+    public void oxygen() {
+        System.out.print("O");
+        oNum.incrementAndGet();
+        if (oNum.get() > 1) {
+            throw new IllegalStateException("生产故障");
+        }
+        tryWater();
+    }
+
+    /**
+     * 获取氢原子数量
+     *
+     * @return
+     */
+    public int getH() {
+        return hNum.get();
+    }
+
+
+    /**
+     * 获取氧原子数量
+     *
+     * @return
+     */
+    public int getO() {
+        return oNum.get();
+    }
+
+    /**
+     * 合成水分子
+     *
+     * @return
+     */
+    protected boolean tryWater() {
+        if (hNum.get() == 2 && oNum.get() == 1) {
+            hNum.set(0);
+            oNum.set(0);
+            System.out.print(";");
+            return true;
+        }
+        return false;
+    }
+
+}
+
+
+class LockH2O implements IH2O {
+
+    private H2OGenerator generator = H2OGenerator.create();
     private Lock lock = new ReentrantLock();
     //h原子满足条件
     private Condition hReady = lock.newCondition();
     //o原子满足条件
     private Condition oReady = lock.newCondition();
 
+
     public void hydrogen(Runnable releaseHydrogen) throws InterruptedException {
         lock.lock();
         try {
-            while (hNum.get() == 2) {//H原子已就绪，此时要么合成水分子，要么等待生产氧原子
-                if (!genWater()) {//是否可以合成水分子
+            while (generator.getH() == 2) {//H原子已就绪，此时要么合成水分子，要么等待生产氧原子
+                if (!generator.tryWater()) {//是否可以合成水分子
                     hReady.await();
                 }
             }
             // releaseHydrogen.run() outputs "H". Do not change or remove this line.
             releaseHydrogen.run();
-            hNum.incrementAndGet();
             hReady.signalAll();
             oReady.signalAll();
         } finally {
@@ -170,14 +250,13 @@ class LH2O extends AH2O {
     public void oxygen(Runnable releaseOxygen) throws InterruptedException {
         lock.lock();
         try {
-            while (oNum.get() == 1) {//O原子已就绪，此时要么合成水分子，要么等待H原子
-                if (!genWater()) {//是否可以合成水分子
+            while (generator.getO() == 1) {//O原子已就绪，此时要么合成水分子，要么等待H原子
+                if (!generator.tryWater()) {//是否可以合成水分子
                     oReady.await();
                 }
             }
             // releaseOxygen.run() outputs "O". Do not change or remove this line.
             releaseOxygen.run();
-            oNum.incrementAndGet();
             hReady.signalAll();
             oReady.signalAll();
         } finally {
@@ -187,14 +266,14 @@ class LH2O extends AH2O {
 }
 
 
-class SH2O extends AH2O {
+class SemaphoreH2O implements IH2O {
 
     //实际上只需两个信号量的和为2。
     // 如果Semaphore_h=2，那么就是先释放两个H，然后释放一个O，输出结果：HHO；
     // 如果是Semaphore_o=2，那么就是先释放一个O，然后释放两个H，输出结果：OHH；
     // 如果Semaphore_h=1，Semaphore_o=1，那就是先释放一个H，再释放一个O，再释放一个H，输出结果：HOH；
-    private Semaphore h = new Semaphore(1);
-    private Semaphore o = new Semaphore(1);
+    private Semaphore h = new Semaphore(2);
+    private Semaphore o = new Semaphore(0);
 
 
     public void hydrogen(Runnable releaseHydrogen) throws InterruptedException {
@@ -202,10 +281,7 @@ class SH2O extends AH2O {
         synchronized (this) {
             // releaseHydrogen.run() outputs "H". Do not change or remove this line.
             releaseHydrogen.run();
-            hNum.incrementAndGet();
-            genWater();
         }
-
         o.release();
     }
 
@@ -213,14 +289,12 @@ class SH2O extends AH2O {
         o.acquire(2);
         // releaseOxygen.run() outputs "O". Do not change or remove this line.
         releaseOxygen.run();
-        oNum.incrementAndGet();
-        genWater();
         h.release(2);
     }
 
 }
 
-class CH2O extends AH2O {
+class CyclicBarrierH2O implements IH2O {
     private Semaphore h = new Semaphore(2);
     private Semaphore o = new Semaphore(1);
     private CyclicBarrier cb = new CyclicBarrier(3);
@@ -232,9 +306,8 @@ class CH2O extends AH2O {
         } catch (BrokenBarrierException e) {
             e.printStackTrace();
         }
+        // releaseHydrogen.run() outputs "H". Do not change or remove this line.
         releaseHydrogen.run();
-        hNum.incrementAndGet();
-        genWater();
         h.release();
     }
 
@@ -245,9 +318,8 @@ class CH2O extends AH2O {
         } catch (BrokenBarrierException e) {
             e.printStackTrace();
         }
+        // releaseOxygen.run() outputs "O". Do not change or remove this line.
         releaseOxygen.run();
-        oNum.incrementAndGet();
-        genWater();
         o.release();
     }
 
