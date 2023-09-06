@@ -60,11 +60,11 @@ public class BuildingH2o {
     private static H2OGenerator generator = H2OGenerator.create();
 
     public static void main(String[] args) throws InterruptedException {
-        gen(new LockH2O(), 10);
+        testGen(new LockH2O(), 10);
         System.out.println();
-        gen(new SemaphoreH2O(), 10);
+        testGen(new SemaphoreH2O(), 10);
         System.out.println();
-        gen(new CyclicBarrierH2O(), 10);
+        testGen(new CyclicBarrierH2O(), 10);
         System.out.println();
 
     }
@@ -76,23 +76,22 @@ public class BuildingH2o {
      * @param n
      * @throws InterruptedException
      */
-    public static void gen(IH2O h2O, int n) throws InterruptedException {
+    public static void testGen(IH2O h2O, int n) throws InterruptedException {
         ExecutorService hes = Executors.newCachedThreadPool();
         for (int i = 0; i < n * 2; i++) {
             hes.submit(() -> {
                 try {
-                    h2O.hydrogen(generator::hydrogen);
+                    h2O.hydrogen(generator.hydrogen(() -> System.out.print("H")));
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             });
         }
-
         ExecutorService oes = Executors.newCachedThreadPool();
         for (int i = 0; i < n; i++) {
             oes.submit(() -> {
                 try {
-                    h2O.oxygen(generator::oxygen);
+                    h2O.oxygen(generator.oxygen(() -> System.out.print("O")));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -162,25 +161,23 @@ class H2OGenerator {
     /**
      * 生产氢原子
      */
-    public void hydrogen() {
-        System.out.print("H");
-        hNum.incrementAndGet();
-        if (hNum.get() > 2) {
-            throw new IllegalStateException("生产故障");
-        }
-        tryWater();
+    public Runnable hydrogen(Runnable runnable) {
+        return () -> {
+            runnable.run();
+            hNum.incrementAndGet();
+            tryWater();
+        };
     }
 
     /**
      * 生产氧原子
      */
-    public void oxygen() {
-        System.out.print("O");
-        oNum.incrementAndGet();
-        if (oNum.get() > 1) {
-            throw new IllegalStateException("生产故障");
-        }
-        tryWater();
+    public Runnable oxygen(Runnable runnable) {
+        return () -> {
+            runnable.run();
+            oNum.incrementAndGet();
+            tryWater();
+        };
     }
 
     /**
