@@ -26,7 +26,7 @@ public class MinimalSubString {
      */
     public String min(String source) {
         //扫描字符串,统计共有几种字符
-        Map<Character, Integer> counter = new HashMap<Character, Integer>(source.length());
+        Map<Character, Integer> counter = new HashMap<>(source.length());
         char[] array = source.toCharArray();
         for (char ch : array) {
             counter.put(ch, 0);
