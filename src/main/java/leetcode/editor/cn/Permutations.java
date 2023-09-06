@@ -66,13 +66,13 @@ public class Permutations {
          * 交换字符数组元素
          *
          * @param arr
-         * @param index1
-         * @param index2
+         * @param i
+         * @param j
          */
-        private void swap(int[] arr, int index1, int index2) {
-            int temp = arr[index1];
-            arr[index1] = arr[index2];
-            arr[index2] = temp;
+        private void swap(int[] arr, int i, int j) {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
 
         /**
@@ -86,8 +86,9 @@ public class Permutations {
         private boolean isFirstChar(int[] arr, int begin, int end) {
             if (end > begin) {
                 for (int i = begin; i < end; i++) {
-                    if (arr[i] == arr[end])
+                    if (arr[i] == arr[end]){
                         return false;
+                    }
                 }
             }
             return true;
