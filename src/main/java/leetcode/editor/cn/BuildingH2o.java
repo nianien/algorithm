@@ -96,7 +96,7 @@ public class BuildingH2o {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }, "Thread-O-" + i);
+            });
         }
         hes.shutdown();
         hes.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
