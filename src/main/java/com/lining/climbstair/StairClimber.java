@@ -1,7 +1,6 @@
 package com.lining.climbstair;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

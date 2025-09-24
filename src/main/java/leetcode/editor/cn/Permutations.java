@@ -24,6 +24,7 @@ import java.util.List;
 public class Permutations {
     public static void main(String[] args) {
         Solution solution = new Permutations().new Solution();
+        solution.permute(new int[]{1, 2, 3});
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

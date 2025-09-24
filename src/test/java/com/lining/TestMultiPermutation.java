@@ -10,7 +10,6 @@ public class TestMultiPermutation {
 
 
     private MultiPermutation multiPermutation = new MultiPermutation();
-    private String testString;
 
     @Before
     public void before() {
@@ -20,8 +19,8 @@ public class TestMultiPermutation {
     @Test
     public void test() {
         multiPermutation.permute("1112");
-//        assertEquals(multiPermutation.permute("123"), factorial("123".length()));
-//        assertEquals(multiPermutation.permute("abbcddef"), factorial("abbcddef".length()) / (factorial("bb".length()) * factorial("dd".length())));
+        assertEquals(multiPermutation.permute("123"), factorial("123".length()));
+        assertEquals(multiPermutation.permute("abbcddef"), factorial("abbcddef".length()) / (factorial("bb".length()) * factorial("dd".length())));
     }
 
     private long factorial(int n) {
