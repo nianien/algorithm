@@ -128,36 +128,6 @@ public class SpiralMatrix {
         }
 
         /**
-         * 坐标相等
-         *
-         * @param p
-         * @return
-         */
-        public boolean eq(Point p) {
-            return this.x == p.x && this.y == p.y;
-        }
-
-        /**
-         * 坐标不等
-         *
-         * @param p
-         * @return
-         */
-        public boolean ne(Point p) {
-            return this.x != p.x && this.y != p.y;
-        }
-
-        /**
-         * 小于指定坐标
-         *
-         * @param p
-         * @return
-         */
-        public boolean lt(Point p) {
-            return this.x < p.x && this.y < p.y;
-        }
-
-        /**
          * 小于等于指定坐标
          *
          * @param p
@@ -165,26 +135,6 @@ public class SpiralMatrix {
          */
         public boolean le(Point p) {
             return this.x <= p.x && this.y <= p.y;
-        }
-
-        /**
-         * 大于指定坐标
-         *
-         * @param p
-         * @return
-         */
-        public boolean gt(Point p) {
-            return this.x > p.x && this.y > p.y;
-        }
-
-        /**
-         * 大于等于指定坐标
-         *
-         * @param p
-         * @return
-         */
-        public boolean ge(Point p) {
-            return this.x >= p.x && this.y >= p.y;
         }
 
     }

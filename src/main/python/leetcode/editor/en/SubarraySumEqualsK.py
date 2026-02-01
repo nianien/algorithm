@@ -32,16 +32,16 @@ from typing import List
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
+        prefix = 0
+        cnt = 0
         # freq[s] = “前缀和等于 s 的历史位置，一共有多少个”
-        freq = {0: 1}
-        pre=0
-        cnt=0
+        feq = {0: 1}
         for v in nums:
-            #∑[1,....k]=pre-k,∑[1,....i]=pre
-            #∑[k...i]=pre-(pre-k)=k
-            pre+=v
-            cnt+=freq.get(pre - k,0)
-            freq[pre] = freq.get(pre, 0) + 1
+            prefix += v
+            #获取前缀和∑[1,....x]=pre-k的次数
+            #已知∑[1,....x]=pre-k,∑[1,....i]=pre, 则∑[x...i]=k
+            cnt += feq.get(prefix - k, 0)
+            feq[prefix]=feq.get(prefix,0)+1
         return cnt
 
 
