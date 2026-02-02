@@ -1,4 +1,4 @@
-package com.lining;
+package io.lining;
 
 import java.util.HashMap;
 import java.util.Map;

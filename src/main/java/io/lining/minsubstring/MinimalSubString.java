@@ -1,4 +1,4 @@
-package com.lining.minsubstring;
+package io.lining.minsubstring;
 
 import java.util.HashMap;
 import java.util.Map;

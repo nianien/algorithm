@@ -1,4 +1,4 @@
-package com.lining.maxsubarray;
+package io.lining.maxsubarray;
 
 import java.util.Arrays;
 

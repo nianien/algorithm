@@ -1,6 +1,6 @@
 package com.lining;
 
-import com.lining.permutation.MultiPermutation;
+import io.lining.permutation.MultiPermutation;
 import org.junit.Before;
 import org.junit.Test;
 

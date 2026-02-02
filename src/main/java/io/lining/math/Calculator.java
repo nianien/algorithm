@@ -1,4 +1,4 @@
-package com.lining.math;
+package io.lining.math;
 
 
 import java.util.*;

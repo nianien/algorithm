@@ -1,6 +1,6 @@
 package com.lining;
 
-import com.lining.climbstair.StairClimber;
+import io.lining.climbstair.StairClimber;
 import org.junit.Test;
 
 /**

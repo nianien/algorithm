@@ -1,6 +1,6 @@
 package com.lining;
 
-import com.lining.sorting.SortUtils;
+import io.lining.sorting.SortUtils;
 import org.junit.Test;
 
 import java.util.Arrays;

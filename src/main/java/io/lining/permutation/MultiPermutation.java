@@ -1,4 +1,4 @@
-package com.lining.permutation;
+package io.lining.permutation;
 
 /**
  * <pre>

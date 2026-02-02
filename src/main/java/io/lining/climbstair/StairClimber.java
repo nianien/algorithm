@@ -1,4 +1,4 @@
-package com.lining.climbstair;
+package io.lining.climbstair;
 
 import java.util.ArrayList;
 import java.util.List;

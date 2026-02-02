@@ -1,4 +1,4 @@
-package com.lining.arraymove;
+package io.lining.arraymove;
 
 /**
  * 题目：设计一个时间复杂度为o(n),空间复杂度不超过o(2)的算法,实现数组a[0.n-1]中所有元素依次循环左（右）移k个位置<br/>

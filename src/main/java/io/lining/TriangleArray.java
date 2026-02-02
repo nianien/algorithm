@@ -1,4 +1,4 @@
-package com.lining;
+package io.lining;
 
 /**
  * scm.com Inc.

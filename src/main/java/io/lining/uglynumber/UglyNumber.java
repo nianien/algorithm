@@ -1,4 +1,4 @@
-package com.lining.uglynumber;
+package io.lining.uglynumber;
 
 /**
  * 寻找丑数 题目：我们把只包含因子2、3和5的数称作丑数（Ugly Number） 习惯上我们把1当做是第一个丑数 求按从小到大的顺序的第1500个丑数

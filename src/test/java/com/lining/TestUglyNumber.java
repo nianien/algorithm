@@ -1,6 +1,6 @@
 package com.lining;
 
-import com.lining.uglynumber.UglyNumber;
+import io.lining.uglynumber.UglyNumber;
 import org.junit.Before;
 import org.junit.Test;
 

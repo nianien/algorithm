@@ -1,4 +1,4 @@
-package com.lining.spiralmatrix;
+package io.lining.spiralmatrix;
 
 
 /**

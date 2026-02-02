@@ -1,6 +1,6 @@
 package com.lining;
 
-import com.lining.minsubstring.MinimalSubString;
+import io.lining.minsubstring.MinimalSubString;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

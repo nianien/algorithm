@@ -1,6 +1,6 @@
 package com.lining;
 
-import com.lining.maxsubarray.MaximalSubArray;
+import io.lining.maxsubarray.MaximalSubArray;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

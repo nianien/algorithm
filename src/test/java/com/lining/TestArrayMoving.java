@@ -1,6 +1,6 @@
 package com.lining;
 
-import com.lining.arraymove.MovingArray;
+import io.lining.arraymove.MovingArray;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

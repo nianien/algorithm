@@ -1,6 +1,6 @@
 package com.lining;
 
-import com.lining.spiralmatrix.SpiralMatrix;
+import io.lining.spiralmatrix.SpiralMatrix;
 import org.junit.Test;
 
 public class TestSpiralMatrix {

@@ -1,4 +1,4 @@
-package com.lining;
+package io.lining;
 
 /**
  * 折叠数组

@@ -1,4 +1,4 @@
-package com.lining;
+package io.lining;
 
 import leetcode.editor.cn.defined.java.ListNode;
 

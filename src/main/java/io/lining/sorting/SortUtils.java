@@ -1,4 +1,4 @@
-package com.lining.sorting;
+package io.lining.sorting;
 
 /**
  * Created with IntelliJ IDEA.
