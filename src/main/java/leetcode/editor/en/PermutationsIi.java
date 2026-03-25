@@ -52,28 +52,34 @@ public class PermutationsIi {
 
         private List<List<Integer>> permuteUnique(int[] nums, int k, List<List<Integer>> ans) {
             if (k == nums.length - 1) {
-                // 此时，数组最后一个位置k上的元素已确定，从而确定了一种排列
+                // 当递归到最后一位时，整个排列已经确定
                 ans.add(Arrays.stream(nums).boxed().toList());
                 return ans;
             }
-            // 位置k上的元素有ch.Length-k+1种可能值
-            // 即k和其后位置上的元素都可能放在k位置上
+            // 枚举区间 [k, nums.length - 1] 中的元素，尝试放到位置 k
             for (int i = k; i < nums.length; i++) {
-                // 确定i位置上的字符是不是第一次出现，
-                // 如果不是第一次出现，则相同的字符已经调换过
+                // 本层去重：
+                // 判断 nums[i] 是否在区间 [k, i) 中第一次出现
+                // 若不是第一次出现，说明相同值已经放到过位置 k，会产生重复排列
                 if (this.isFirstChar(nums, k, i)) {
-                    //将i位置的元素移动到k之前
+                    // 交换 nums[k] 和 nums[i]，将 nums[i] 放到位置 k
                     this.swap(nums, k, i);
+                    // 递归处理下一个位置
                     this.permuteUnique(nums, k + 1, ans);
-                    //将k位置的元素移动到i之后
+                    // 回溯：恢复交换前的状态
                     this.swap(nums, k, i);
                 }
             }
             return ans;
         }
 
+        /**
+         * 交互数组元素
+         * @param nums
+         * @param i
+         * @param j
+         */
         private void swap(int[] nums, int i, int j) {
-            //还原排列数组
             int temp = nums[i];
             nums[i] = nums[j];
             nums[j] = temp;
