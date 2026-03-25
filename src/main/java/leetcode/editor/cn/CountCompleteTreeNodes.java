@@ -46,7 +46,7 @@
 
 package leetcode.editor.cn;
 
-import leetcode.editor.cn.defined.java.TreeNode;
+import leetcode.editor.defined.java.TreeNode;
 
 public class CountCompleteTreeNodes {
     public static void main(String[] args) {

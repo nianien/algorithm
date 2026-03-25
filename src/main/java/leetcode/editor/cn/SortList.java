@@ -45,7 +45,7 @@
 package leetcode.editor.cn;
 
 
-import leetcode.editor.cn.defined.java.ListNode;
+import leetcode.editor.defined.java.ListNode;
 
 public class SortList {
     public static void main(String[] args) {

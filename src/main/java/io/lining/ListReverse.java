@@ -1,6 +1,6 @@
 package io.lining;
 
-import leetcode.editor.cn.defined.java.ListNode;
+import leetcode.editor.defined.java.ListNode;
 
 /**
  * scm.com Inc.
@@ -43,6 +43,8 @@ public class ListReverse {
         System.out.println(l);
         ListNode r = reverse2(l);
         System.out.println(r);
+
+
     }
 
 }

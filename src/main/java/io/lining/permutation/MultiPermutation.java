@@ -47,7 +47,7 @@ public class MultiPermutation {
      * @param str
      */
     public int permute(String str) {
-        return permute(str.toCharArray());
+        return permute(str.toCharArray(),0);
     }
 
     /**
