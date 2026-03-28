@@ -64,7 +64,7 @@ func canCompleteCircuit2(gas []int, cost []int) int {
 	minSpare := gas[0]
 	minIndex := 0
 	spare := 0
-	for i := 0; i < n; i++ {
+	for i := range n {
 		spare += gas[i] - cost[i]
 		if spare < minSpare {
 			minSpare = spare
@@ -88,7 +88,7 @@ func canCompleteCircuit2(gas []int, cost []int) int {
 func canCompleteCircuit(gas []int, cost []int) int {
 	n := len(gas)
 	delta := make([]int, n)
-	for i := 0; i < n; i++ {
+	for i := range n {
 		delta[i] = gas[i] - cost[i]
 	}
 	for i := 0; i < n; i++ {

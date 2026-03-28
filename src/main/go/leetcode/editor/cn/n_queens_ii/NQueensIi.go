@@ -43,7 +43,7 @@ import (
 // leetcode submit region begin(Prohibit modification and deletion)
 func totalNQueens(n int) int {
 	var res int
-	for i := 0; i < n; i++ {
+	for i := range n {
 		arr := make([]byte, n*n)
 		//传递指针数组
 		totalNQueens_0(0, i, 0, n, arr, &res)
@@ -59,7 +59,7 @@ func totalNQueens_0(x int, y int, k int, n int, board []byte, res *int) {
 
 	var fallback []int
 	success := true
-	for i := 0; i < n; i++ {
+	for i := range n {
 		if i != y {
 			//NOTE: 指针传递
 			success = success && check(board, n, x, i, &fallback)
@@ -95,7 +95,7 @@ func totalNQueens_0(x int, y int, k int, n int, board []byte, res *int) {
 			return
 		}
 		//递归寻找下一行的摆放位置
-		for i := 0; i < n; i++ {
+		for i := range n {
 			totalNQueens_0(x+1, i, k+1, n, board, res)
 		}
 		board[x*n+y] = 0

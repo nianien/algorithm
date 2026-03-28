@@ -41,7 +41,7 @@ import (
 func longestPalindrome(s string) string {
 	n := len(s)
 	dp := make([][]bool, n)
-	for i := 0; i < n; i++ {
+	for i := range n {
 		dp[i] = make([]bool, n)
 	}
 	max := [2]int{0, 0}

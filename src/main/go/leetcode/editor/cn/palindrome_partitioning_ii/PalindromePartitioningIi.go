@@ -77,14 +77,14 @@ func minCut(s string) int {
 	}
 
 	var f = make([]int, n)
-	for i := 0; i < n; i++ {
+	for i := range n {
 		//s[0..i]为回文串,则最小分割次数为0
 		if dp[0][i] {
 			continue
 		}
 		//最大分割次数不超过n
 		f[i] = n
-		for j := 0; j < i; j++ {
+		for j := range i {
 			if dp[j+1][i] && f[j]+1 < f[i] {
 				f[i] = f[j] + 1
 			}

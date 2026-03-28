@@ -104,7 +104,7 @@ func (pq *PriorityQueue) Peek() Triple {
 func minInterval(intervals [][]int, queries []int) []int {
 	//构建二元组，query和索引位置
 	pairs := make([]Pair, len(queries))
-	for i := 0; i < len(queries); i++ {
+	for i := range len(queries) {
 		pairs[i] = Pair{i, queries[i]}
 	}
 	//按照query排序

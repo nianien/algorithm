@@ -62,7 +62,7 @@ func longestValidParentheses1(s string) int {
 	maxAns := 0
 	//为了统一边界处理, 栈底元素")"的索引初始为-1
 	var stack = []int{-1}
-	for i := 0; i < len(s); i++ {
+	for i := range len(s) {
 		if s[i] == '(' {
 			stack = append(stack, i)
 		} else {
@@ -122,7 +122,7 @@ func longestValidParentheses2(s string) int {
 */
 func longestValidParentheses3(s string) int {
 	left, right, maxLength := 0, 0, 0
-	for i := 0; i < len(s); i++ {
+	for i := range len(s) {
 		if s[i] == '(' {
 			left++
 		} else {

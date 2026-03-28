@@ -49,7 +49,7 @@ func solveNQueens(n int) [][]string {
 	var res [][]string
 	//每行最多只有一个皇后，按行从上往下，决定每行可摆放的皇后位置，到第n-1行完成一次尝试
 	//因此，我们决定初始化第0行摆放的位置，从[0,0]...[0,n-1]，只需遍历n次
-	for i := 0; i < n; i++ {
+	for i := range n {
 		arr := create(n)
 		//传递指针数组
 		solveNQueens_0(0, i, 0, n, arr, &res)
@@ -65,7 +65,7 @@ func solveNQueens_0(x int, y int, k int, n int, board [][]byte, res *[][]string)
 
 	var fallback []int
 	success := true
-	for i := 0; i < n; i++ {
+	for i := range n {
 		if i != y {
 			//NOTE: 指针传递
 			success = success && mark(board, n, x, i, &fallback)
@@ -102,7 +102,7 @@ func solveNQueens_0(x int, y int, k int, n int, board [][]byte, res *[][]string)
 		}
 
 		//递归寻找下一行的摆放位置
-		for i := 0; i < n; i++ {
+		for i := range n {
 			solveNQueens_0(x+1, i, k+1, n, board, res)
 		}
 		//back-track

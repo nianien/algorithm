@@ -49,7 +49,7 @@ import . "leetcode/editor/cn/defined"
  */
 func generateTrees(n int) []*TreeNode {
 	nums := make([]int, n)
-	for i := 0; i < n; i++ {
+	for i := range n {
 		nums[i] = i + 1
 	}
 	return generateTrees0(nums)
@@ -65,7 +65,7 @@ func generateTrees0(nums []int) []*TreeNode {
 		return []*TreeNode{{Val: nums[0]}}
 	}
 	var res []*TreeNode
-	for i := 0; i < n; i++ {
+	for i := range n {
 		left := generateTrees0(nums[:i])
 		right := generateTrees0(nums[i+1:])
 		for _, l := range left {

@@ -57,8 +57,8 @@ import . "leetcode/editor/cn/defined"
 
 func isValidBST(root *TreeNode) bool {
 	//中序遍历法
-	var pre = math.MinInt64
-	return isValidBST1(root, &pre)
+
+	return isValidBST1(root, new(math.MinInt64))
 	//判断判断子树中所有节点的值是否都在 (l,r)开区间范围内
 	//return isValidBST0(root, math.MinInt64, math.MaxInt64)
 }

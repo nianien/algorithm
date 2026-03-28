@@ -67,8 +67,8 @@ func wordBreak(s string, wordDict []string) []string {
 	dp[0] = true
 	//判断前i个字符是否能拆分成单词
 	//如果前s[0..j-1]和s[j..i]能拆成单词,则s[0..i]则能拆成单词
-	for i := 0; i <= l; i++ {
-		for j := 0; j < i; j++ {
+	for i := range l + 1 {
+		for j := range i {
 			if dp[j] && wMap[s[j:i]] {
 				dp[i] = true
 				break

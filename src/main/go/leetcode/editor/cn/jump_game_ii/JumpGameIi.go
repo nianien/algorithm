@@ -59,7 +59,7 @@ func jump(nums []int) int {
 	//上一跳最远距离，到达该位置时，进行下一跳，跳至下一个位置最远距离
 	end := 0
 	step := 0
-	for i := 0; i < n-1; i++ {
+	for i := range n - 1 {
 		if i+nums[i] > far {
 			far = i + nums[i]
 		}

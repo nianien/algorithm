@@ -105,8 +105,8 @@ func printTree2(root *TreeNode) [][]string {
 	arr[0][(n-1)/2] = strconv.Itoa(root.Val)
 	ls := list.List{}
 	ls.PushBack(root)
-	for i := 0; i < m; i++ {
-		for j := 0; j < n; j++ {
+	for i := range m {
+		for j := range n {
 			if arr[i][j] != "" {
 				node := ls.Front().Value.(*TreeNode)
 				ls.Remove(ls.Front())

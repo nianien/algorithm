@@ -51,7 +51,7 @@ golang可以给一个函数的返回值指定名字。如果指定了一个返�
 func fourSum(nums []int, target int) (quadruplets [][]int) {
 	sort.Ints(nums)
 	var n = len(nums)
-	for i := 0; i < len(nums)-3; i++ {
+	for i := range len(nums) - 3 {
 		if i > 0 && nums[i] == nums[i-1] || nums[i]+nums[n-3]+nums[n-2]+nums[n-1] < target {
 			continue
 		}

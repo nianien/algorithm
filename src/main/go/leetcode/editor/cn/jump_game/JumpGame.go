@@ -45,7 +45,7 @@ func canJump(nums []int) bool {
 	n := len(nums)
 	//可以跳跃最远的位置
 	far := 0
-	for i := 0; i < n; i++ {
+	for i := range n {
 		if i <= far {
 			if i+nums[i] > far {
 				far = i + nums[i]

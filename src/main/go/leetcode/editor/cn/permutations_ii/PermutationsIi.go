@@ -55,7 +55,7 @@ func permuteUnique_(nums []int, k int, check []int, ans *[][]int) {
 		//根据校验数组返回当前排列数组
 		*ans = append(*ans, calculate(check, nums))
 	}
-	for i := 0; i < len(nums); i++ {
+	for i := range len(nums) {
 		//为了解决重复元素的问题, 只需要保证在填第k个元素的时候, 重复数字只会被填入一次即可
 		//也就是每次填入的数一定是这个数所在集合中「从左往右第一个未被填过的数字」
 		//也就是说, 相同的数字，只有左边的使用了，右边的才能使用，如果前一个相同元素未使用, 那么当前元素就不能使用

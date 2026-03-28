@@ -58,7 +58,7 @@ import (
 // leetcode submit region begin(Prohibit modification and deletion)
 func getPermutation(n int, k int) string {
 	var temp = make([]int, n)
-	for i := 0; i < n; i++ {
+	for i := range n {
 		temp[i] = i + 1
 	}
 	var count int

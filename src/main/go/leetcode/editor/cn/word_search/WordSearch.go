@@ -55,8 +55,8 @@ import "fmt"
 
 func exist(board [][]byte, word string) bool {
 	m, n, l := len(board), len(board[0]), len(word)
-	for i := 0; i < m; i++ {
-		for j := 0; j < n; j++ {
+	for i := range m {
+		for j := range n {
 			flag := make([]bool, m*n)
 			if exist1(board, []byte(word), m, n, l, flag, i, j, 0) {
 				return true
